@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="abonent"> 
+ 
+    <resultMap id = "result" type = "Abonent"> 
+       <result property = "id" column = "id"/> 
+       <result property = "firstName" column = "firstName"/> 
+       <result property = "lastName" column = "lastName"/> 
+    </resultMap> 
+ 
+    <select id = "selectAll" resultMap = "result"> 
+       SELECT * FROM abonent;  
+    </select> 
+
+    <select id = "selectAbonentById" parameterType = "int" resultMap = "result"> 
+       SELECT * FROM abonent WHERE id = #{id}; 
+    </select> 
+
+    <update id = "update" parameterType = "Abonent"> 
+       UPDATE abonent SET 
+        firstName = #{firstName}, 
+        lastName = #{lastName} 
+        WHERE id = #{id}; 
+    </update> 
+  
+    <delete id = "deleteById" parameterType = "int"> 
+       DELETE from abonent WHERE id = #{id}; 
+    </delete> 
+
+    <insert id = "insert" parameterType = "Abonent"> 
+       INSERT INTO Abonent (firstName, lastName)  
+       VALUES (#{firstName}, #{lastName});     
+    </insert>
+</mapper> 
