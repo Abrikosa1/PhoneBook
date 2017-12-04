@@ -18,10 +18,10 @@ public class AbonentDAL extends BaseDAL {
         return abonents;
     }
     
-    public Abonent selectAbonentById(int id)
+    public Abonent selectById(int id)
     {
         SqlSession session = sqlSessionFactory.openSession(); 
-        Abonent abonent =  session.selectOne("abonent.selectAbonentById",id); 
+        Abonent abonent =  session.selectOne("abonent.selectById",id); 
         session.close(); 
         return abonent;
     }
@@ -53,7 +53,8 @@ public class AbonentDAL extends BaseDAL {
      public Abonent deleteById(int id)
     {
         SqlSession session = sqlSessionFactory.openSession(); 
-        Abonent abonent =  session.selectOne("abonent.deleteById",id); 
+        Abonent abonent =  session.selectOne("abonent.deleteById",id);
+        session.commit();
         session.close(); 
         return abonent;
     }

@@ -30,7 +30,7 @@ public class AbonentDalTest {
         System.out.println("selectById");
         int id = 1;
         AbonentDAL instance = new AbonentDAL();
-        Abonent result = instance.selectAbonentById(id);
+        Abonent result = instance.selectById(id);
         assertTrue(result!=null && result.getId()==id);
     }
 

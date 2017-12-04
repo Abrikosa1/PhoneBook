@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package phonebook.api;
 
 import java.io.IOException;
@@ -8,23 +13,33 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import phonebook.controllers.AbonentController;
-import phonebook.mappers.JsonAbonentMapper;
-import phonebook.model.Abonent;
+import phonebook.controllers.AdminController;
+import phonebook.mappers.JsonAdminMapper;
+import phonebook.model.Admin;
 
 
-@WebServlet(name = "GetAllAbonent", urlPatterns = {"/GetAllAbonent"})
-public class GetAllAbonents extends HttpServlet {
+@WebServlet(name = "DeleteAdminById", urlPatterns = {"/DeleteAdminById"})
+public class DeleteAdminById extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        int id = Integer.parseInt(request.getParameter("id"));
         try (PrintWriter out = response.getWriter()) 
         {
-            AbonentController abonentController = new AbonentController();
-            List<Abonent> list= abonentController.getAllAbonent();
-            String json = JsonAbonentMapper.toJSON(list);
-            out.println(json);
+             AdminController adminController = new AdminController();
+             Admin admin= adminController.deleteAdminById(id);
+             String json=JsonAdminMapper.toJSON(admin);
+             out.println(json);
         }
     }
 

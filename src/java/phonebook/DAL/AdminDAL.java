@@ -61,7 +61,8 @@ public class AdminDAL extends BaseDAL {
 public Admin deleteById(int id)
     {
         SqlSession session = sqlSessionFactory.openSession(); 
-        Admin abonent =  session.selectOne("admin.deleteById",id); 
+        Admin abonent =  session.selectOne("admin.deleteById",id);
+        session.commit();
         session.close(); 
         return abonent;
     }    

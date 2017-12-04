@@ -61,7 +61,8 @@ public class PhoneNumberDAL extends BaseDAL {
     public PhoneNumber deleteById(int id)
     {
         SqlSession session = sqlSessionFactory.openSession(); 
-        PhoneNumber abonent =  session.selectOne("phonenumber.deleteById",id); 
+        PhoneNumber abonent =  session.selectOne("phonenumber.deleteById",id);
+        session.commit();
         session.close(); 
         return abonent;
     }

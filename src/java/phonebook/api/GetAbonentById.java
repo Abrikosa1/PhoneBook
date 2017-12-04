@@ -14,12 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import phonebook.controllers.AbonentController;
+import phonebook.mappers.JsonAbonentMapper;
 import phonebook.model.Abonent;
 
-/**
- *
- * @author Alex
- */
+
 @WebServlet(name = "GetAbonentById", urlPatterns = {"/GetAbonentById"})
 public class GetAbonentById extends HttpServlet {
 
@@ -40,8 +38,8 @@ public class GetAbonentById extends HttpServlet {
         {
              AbonentController abonentController = new AbonentController();
              Abonent abonent= abonentController.getAbonentById(id);
-             // TODO add JSON Mapper
-             out.println(abonent);
+             String json=JsonAbonentMapper.toJSON(abonent);
+             out.println(json);
         }
     }
 

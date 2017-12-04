@@ -26,7 +26,7 @@ public class AdminController
         return adminDal.selectAll();
     }
     
-    public Admin getAdmin(int id)
+    public Admin getAdminById(int id)
     {
         return adminDal.selectById(id);
     }

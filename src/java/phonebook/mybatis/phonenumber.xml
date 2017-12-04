@@ -3,7 +3,7 @@
   
 <mapper namespace="phonenumber"> 
  
-    <resultMap id = "result" type = "PhoneNumber"> 
+    <resultMap id = "result" type = "phonebook.model.PhoneNumber"> 
        <result property = "id" column = "id"/> 
        <result property = "phoneNum" column = "phoneNum"/> 
     </resultMap> 
@@ -16,7 +16,7 @@
        SELECT * FROM phonenumber WHERE id = #{id}; 
     </select> 
 
-    <update id = "update" parameterType = "PhoneNumber"> 
+    <update id = "update" parameterType = "phonebook.model.PhoneNumber"> 
        UPDATE phonenumber SET 
         phoneNum = #{phoneNum}, 
         WHERE id = #{id}; 
@@ -26,7 +26,7 @@
        DELETE from phonenumber WHERE id = #{id}; 
     </delete> 
 
-    <insert id = "insert" parameterType = "PhoneNumber"> 
+    <insert id = "insert" parameterType = "phonebook.model.PhoneNumber"> 
        INSERT INTO PhoneNumber (phoneNum)  
        VALUES (#{phoneNum});     
     </insert>

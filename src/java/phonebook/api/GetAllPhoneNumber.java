@@ -8,22 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import phonebook.controllers.AbonentController;
-import phonebook.mappers.JsonAbonentMapper;
-import phonebook.model.Abonent;
+import phonebook.controllers.PhoneNumberController;
+import phonebook.mappers.JsonPhoneNumberMapper;
+import phonebook.model.PhoneNumber;
 
 
-@WebServlet(name = "GetAllAbonent", urlPatterns = {"/GetAllAbonent"})
-public class GetAllAbonents extends HttpServlet {
+@WebServlet(name = "GetAllPhoneNumber", urlPatterns = {"/GetAllPhoneNumber"})
+public class GetAllPhoneNumber extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) 
         {
-            AbonentController abonentController = new AbonentController();
-            List<Abonent> list= abonentController.getAllAbonent();
-            String json = JsonAbonentMapper.toJSON(list);
+            PhoneNumberController phonenumberController = new PhoneNumberController();
+            List<PhoneNumber> list= phonenumberController.getAllPhoneNumber();
+            String json = JsonPhoneNumberMapper.toJSON(list);
             out.println(json);
         }
     }

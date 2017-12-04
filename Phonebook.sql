@@ -25,25 +25,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Abonents`
+-- Структура таблицы `Abonent`
 --
 
-CREATE TABLE `Abonents` (
+CREATE TABLE `Abonent` (
   `id` int(2) NOT NULL COMMENT 'ид абонента',
-  `first_name` varchar(50) NOT NULL DEFAULT 'no' COMMENT 'имя абонента',
-  `middle_name` varchar(50) NOT NULL DEFAULT 'no' COMMENT 'отчество абонента',
-  `last_name` varchar(50) NOT NULL DEFAULT 'no' COMMENT 'фамилия абонента'
+  `firstName` varchar(50) NOT NULL DEFAULT 'no' COMMENT 'имя абонента',
+  `lastName` varchar(50) NOT NULL DEFAULT 'no' COMMENT 'фамилия абонента'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `Abonents`
+-- Дамп данных таблицы `Abonent`
 --
 
-INSERT INTO `Abonents` (`id`, `first_name`, `middle_name`, `last_name`) VALUES
-(1, 'Антон', 'Юрьевич', 'Юрков'),
-(2, 'Антон', 'Иванович', 'Авдеев'),
-(3, 'Денис', 'Игоревич', 'Иванов'),
-(4, 'Евгений', 'Евгеньевич', 'Фялковский');
+INSERT INTO `Abonent` (`id`, `firstName`, `lastName`) VALUES
+(1, 'Антон','Юрков'),
+(2, 'Антон', 'Авдеев'),
+(3, 'Денис', 'Иванов'),
+(4, 'Евгений', 'Фялковский');
 
 -- --------------------------------------------------------
 
@@ -71,20 +70,20 @@ INSERT INTO `Admin` (`id`, `login`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Phone_Numbers`
+-- Структура таблицы `PhoneNumber`
 --
 
-CREATE TABLE `Phone_Numbers` (
+CREATE TABLE `PhoneNumber` (
   `id` int(6) NOT NULL COMMENT 'ид номера',
-  `abonent_id` int(6) NOT NULL COMMENT 'ид абонента',
-  `phone_num` varchar(20) NOT NULL DEFAULT 'no' COMMENT 'номер телефона'
+  `abonentId` int(6) NOT NULL COMMENT 'ид абонента',
+  `phoneNum` varchar(20) NOT NULL DEFAULT 'no' COMMENT 'номер телефона'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `Phone_Numbers`
+-- Дамп данных таблицы `PhoneNumber`
 --
 
-INSERT INTO `Phone_Numbers` (`id`, `abonent_id`, `phone_num`) VALUES
+INSERT INTO `PhoneNumber` (`id`, `abonentId`, `phoneNum`) VALUES
 (1, 1, '8-888-888-88-88'),
 (2, 3, '8-999-999-99-99'),
 (3, 2, '8-333-333-33-33'),
@@ -95,9 +94,9 @@ INSERT INTO `Phone_Numbers` (`id`, `abonent_id`, `phone_num`) VALUES
 --
 
 --
--- Индексы таблицы `Abonents`
+-- Индексы таблицы `Abonent`
 --
-ALTER TABLE `Abonents`
+ALTER TABLE `Abonent`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -107,20 +106,20 @@ ALTER TABLE `Admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `Phone_Numbers`
+-- Индексы таблицы `PhoneNumber`
 --
-ALTER TABLE `Phone_Numbers`
+ALTER TABLE `PhoneNumber`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `abonent_id` (`abonent_id`);
+  ADD KEY `abonentId` (`abonentId`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT для таблицы `Abonents`
+-- AUTO_INCREMENT для таблицы `Abonent`
 --
-ALTER TABLE `Abonents`
+ALTER TABLE `Abonent`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT COMMENT 'ид абонента', AUTO_INCREMENT=5;
 
 --
@@ -130,9 +129,9 @@ ALTER TABLE `Admin`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT COMMENT 'ид админа', AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT для таблицы `Phone_Numbers`
+-- AUTO_INCREMENT для таблицы `PhoneNumber`
 --
-ALTER TABLE `Phone_Numbers`
+ALTER TABLE `PhoneNumber`
   MODIFY `id` int(6) NOT NULL AUTO_INCREMENT COMMENT 'ид номера', AUTO_INCREMENT=5;
 
 --
@@ -140,10 +139,10 @@ ALTER TABLE `Phone_Numbers`
 --
 
 --
--- Ограничения внешнего ключа таблицы `Phone_Numbers`
+-- Ограничения внешнего ключа таблицы `PhoneNumber`
 --
-ALTER TABLE `Phone_Numbers`
-  ADD CONSTRAINT `Phone_Numbers_ibfk_1` FOREIGN KEY (`abonent_id`) REFERENCES `Abonents` (`id`);
+ALTER TABLE `PhoneNumber`
+  ADD CONSTRAINT `PhoneNumber_ibfk_1` FOREIGN KEY (`abonentId`) REFERENCES `Abonent` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

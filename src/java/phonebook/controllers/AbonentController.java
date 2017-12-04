@@ -9,10 +9,7 @@ import java.util.List;
 import phonebook.DAL.AbonentDAL;
 import phonebook.model.Abonent;
 
-/**
- *
- * @author Alex
- */
+
 public class AbonentController 
 {
     protected AbonentDAL abonentDal;
@@ -28,7 +25,7 @@ public class AbonentController
     
     public Abonent getAbonentById(int id)
     {
-        return abonentDal.selectAbonentById(id);
+        return abonentDal.selectById(id);
     }
      
     public int insertAbonent(Abonent abonent)

@@ -19,12 +19,12 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
  */
 public class BaseDAL {
     
-    protected static String config = "mybatis/config.xml";
+    protected static String config = "phonebook/mybatis/config.xml";
     protected SqlSessionFactory sqlSessionFactory;
     public BaseDAL() {
         Reader reader = null;
         try {   
-            reader = Resources.getResourceAsReader(config);
+            reader = Resources.getResourceAsReader("phonebook/mybatis/config.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
             System.out.println("create sqlSessionFactory  +");
         } catch (IOException ex) {

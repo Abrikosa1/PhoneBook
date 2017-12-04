@@ -3,7 +3,7 @@
   
 <mapper namespace="abonent"> 
  
-    <resultMap id = "result" type = "Abonent"> 
+    <resultMap id = "result" type = "phonebook.model.Abonent"> 
        <result property = "id" column = "id"/> 
        <result property = "firstName" column = "firstName"/> 
        <result property = "lastName" column = "lastName"/> 
@@ -13,11 +13,11 @@
        SELECT * FROM abonent;  
     </select> 
 
-    <select id = "selectAbonentById" parameterType = "int" resultMap = "result"> 
+    <select id = "selectById" parameterType = "int" resultMap = "result"> 
        SELECT * FROM abonent WHERE id = #{id}; 
     </select> 
 
-    <update id = "update" parameterType = "Abonent"> 
+    <update id = "update" parameterType = "phonebook.model.Abonent"> 
        UPDATE abonent SET 
         firstName = #{firstName}, 
         lastName = #{lastName} 
@@ -28,7 +28,7 @@
        DELETE from abonent WHERE id = #{id}; 
     </delete> 
 
-    <insert id = "insert" parameterType = "Abonent"> 
+    <insert id = "insert" parameterType = "phonebook.model.Abonent"> 
        INSERT INTO Abonent (firstName, lastName)  
        VALUES (#{firstName}, #{lastName});     
     </insert>

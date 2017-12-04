@@ -3,7 +3,7 @@
   
 <mapper namespace="admin"> 
  
-    <resultMap id = "result" type = "Admin"> 
+    <resultMap id = "result" type = "phonebook.model.Admin"> 
        <result property = "id" column = "id"/> 
        <result property = "login" column = "login"/> 
        <result property = "password" column = "password"/> 
@@ -17,7 +17,7 @@
        SELECT * FROM admin WHERE id = #{id}; 
     </select> 
 
-    <update id = "update" parameterType = "Admin"> 
+    <update id = "update" parameterType = "phonebook.model.Admin"> 
        UPDATE admin SET 
         login = #{login}, 
         password = #{password} 
@@ -28,7 +28,7 @@
        DELETE from admin WHERE id = #{id}; 
     </delete> 
 
-    <insert id = "insert" parameterType = "Admin"> 
+    <insert id = "insert" parameterType = "phonebook.model.Admin"> 
        INSERT INTO Admin (login, password)  
        VALUES (#{login}, #{password});     
     </insert>

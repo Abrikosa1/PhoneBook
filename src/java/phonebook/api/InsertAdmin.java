@@ -2,29 +2,41 @@ package phonebook.api;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import phonebook.controllers.AbonentController;
-import phonebook.mappers.JsonAbonentMapper;
-import phonebook.model.Abonent;
+import phonebook.controllers.AdminController;
+import phonebook.mappers.JsonAdminMapper;
+import phonebook.model.Admin;
 
+/**
+ *
+ * @author Alex
+ */
+@WebServlet(name = "InsertAdmin", urlPatterns = {"/InsertAdmin"})
+public class InsertAdmin extends HttpServlet {
 
-@WebServlet(name = "GetAllAbonent", urlPatterns = {"/GetAllAbonent"})
-public class GetAllAbonents extends HttpServlet {
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String json = request.getParameter("json");
         try (PrintWriter out = response.getWriter()) 
         {
-            AbonentController abonentController = new AbonentController();
-            List<Abonent> list= abonentController.getAllAbonent();
-            String json = JsonAbonentMapper.toJSON(list);
-            out.println(json);
+            Admin admin = JsonAdminMapper.fromJSON(json);
+            AdminController adminController = new AdminController();
+            int count = adminController.insertAdmin(admin);
+            out.print(count);
         }
     }
 

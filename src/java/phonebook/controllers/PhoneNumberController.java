@@ -26,7 +26,7 @@ public class PhoneNumberController
         return phonenumberDal.selectAll();
     }
     
-    public PhoneNumber getPhoneNumber(int id)
+    public PhoneNumber getPhoneNumberById(int id)
     {
         return phonenumberDal.selectById(id);
     }

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package phonebook.api;
 
 import java.io.IOException;
@@ -13,18 +18,28 @@ import phonebook.mappers.JsonAbonentMapper;
 import phonebook.model.Abonent;
 
 
-@WebServlet(name = "GetAllAbonent", urlPatterns = {"/GetAllAbonent"})
-public class GetAllAbonents extends HttpServlet {
+@WebServlet(name = "DeleteAbonentById", urlPatterns = {"/DeleteAbonentById"})
+public class DeleteAbonentById extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        int id = Integer.parseInt(request.getParameter("id"));
         try (PrintWriter out = response.getWriter()) 
         {
-            AbonentController abonentController = new AbonentController();
-            List<Abonent> list= abonentController.getAllAbonent();
-            String json = JsonAbonentMapper.toJSON(list);
-            out.println(json);
+             AbonentController abonentController = new AbonentController();
+             Abonent abonent= abonentController.deleteAbonentById(id);
+             String json=JsonAbonentMapper.toJSON(abonent);
+             out.println(json);
         }
     }
 
