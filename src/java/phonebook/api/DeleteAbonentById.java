@@ -37,7 +37,7 @@ public class DeleteAbonentById extends HttpServlet {
         try (PrintWriter out = response.getWriter()) 
         {
              AbonentController abonentController = new AbonentController();
-             Abonent abonent= abonentController.deleteAbonentById(id);
+             Abonent abonent= abonentController.deleteAbonentById(2);
              String json=JsonAbonentMapper.toJSON(abonent);
              out.println(json);
         }

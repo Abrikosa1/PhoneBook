@@ -13,10 +13,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-/**
- *
- * @author Alex
- */
+
 public class BaseDAL {
     
     protected static String config = "phonebook/mybatis/config.xml";

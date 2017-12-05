@@ -33,11 +33,11 @@ public class GetAdminById extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
+        //int id = Integer.parseInt(request.getParameter("id"));
         try (PrintWriter out = response.getWriter()) 
         {
              AdminController adminController = new AdminController();
-             Admin admin= adminController.getAdminById(id);
+             Admin admin= adminController.getAdminById(2);
              String json=JsonAdminMapper.toJSON(admin);
              out.println(json);
         }
