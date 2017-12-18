@@ -14,12 +14,14 @@ import java.util.Objects;
 public class PhoneNumber {
     private int id;
     private String phoneNum;
+    
 
     public PhoneNumber() {
     }
     public PhoneNumber(int id, String phoneNum) {
         this.id = id;
         this.phoneNum = phoneNum;
+        
     }
 
     public void setId(int id) {

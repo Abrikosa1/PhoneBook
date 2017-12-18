@@ -14,7 +14,7 @@ import phonebook.model.Abonent;
 
 
 @WebServlet(name = "GetAllAbonent", urlPatterns = {"/GetAllAbonent"})
-public class GetAllAbonents extends HttpServlet {
+public class GetAllAbonent extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

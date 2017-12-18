@@ -8,13 +8,20 @@
         <link href="lib/css/bootstrap.min.css" rel="stylesheet">
         <link href="lib/css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="lib/css/bootstrap-theme.css" type="text/css"/>
-
-        <script src="controllers/AbonentController.js"></script>
-        <script src="controllers/AdminController.js"></script>
-        <script src="controllers/PhoneNumberController.js"></script>
         <script src="service/AbonentService.js"></script>
         <script src="service/AdminService.js"></script>
         <script src="service/PhoneNumberService.js"></script>
+        <script src="controllers/AbonentController.js"></script>
+        <script src="controllers/AdminController.js"></script>
+        <script src="controllers/PhoneNumberController.js"></script>
+        
+         <script>
+            function abonentClick(id)
+            {
+              var phonenumberController =  new PhoneNumberController();
+              phonenumberController.getPhoneNumberByAbonentIdView(id);
+            }
+        </script>
     </head>
 
   <body>
@@ -61,8 +68,26 @@
     </div>
   </div>
 </div>
+      <div class="container">
+      <div class="row">
+          <div  class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+          <div id="abonent" class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div> 
+          <div id="phonenumber" class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>  
+          <div  class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+      </div>
+    </div>
     <!--  ================================================== -->
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
+    <script>
+         window.onload = function()
+         {
+              var controller = new AbonentController();
+              controller.getAllAbonentView(); 
+              var phonenumberController =  new PhoneNumberController();
+              phonenumberController.getPhoneNumberByAbonentId(1);
+         }
+        
+    </script>
   </body>
 </html>
