@@ -37,14 +37,15 @@ public class AbonentTest {
     public void tearDown() {
     }
 
-   @Test
+    @Test
     public void testCreateAbonent() {
         System.out.println("test Abonent create Abonent");
-        Abonent abonent = new Abonent(1,"firstName","lastName");
+        Abonent abonent = new Abonent(1,"firstName","lastName","patronymic");
         
         assertEquals(abonent.getId(),1);
         assertEquals(abonent.getFirstName(), "firstName");
         assertEquals(abonent.getLastName(),"lastName");
+        assertEquals(abonent.getPatronymic(),"patronymic");
         
         abonent.setId(2);
         assertEquals(abonent.getId(),2);
@@ -52,15 +53,18 @@ public class AbonentTest {
         abonent.setFirstName("Ivan");
         assertEquals(abonent.getFirstName(),"Ivan");
         
-        abonent.setLastName("Ivanich");
-        assertEquals(abonent.getLastName(),"Ivanich");  
+        abonent.setLastName("Ivanov");
+        assertEquals(abonent.getLastName(),"Ivanov");  
+        
+        abonent.setPatronymic("Ivanich");
+        assertEquals(abonent.getPatronymic(),"Ivanich"); 
     }
     @Test
     public void testEquals() {
         System.out.println("test Abonent equals");
-        Abonent abonent1 = new Abonent(1, "firstName", "lastName");
-        Abonent abonent2 = new Abonent(1, "firstName", "lastName");
-        Abonent abonent3 = new Abonent(3, "John", "Johnson");
+        Abonent abonent1 = new Abonent(1, "firstName", "lastName","patronymic");
+        Abonent abonent2 = new Abonent(1, "firstName", "lastName","patronymic");
+        Abonent abonent3 = new Abonent(3, "John", "Johnson","Johnsonovich");
         
         assertTrue(abonent1.equals(abonent2));
         assertFalse(abonent1.equals(abonent3));

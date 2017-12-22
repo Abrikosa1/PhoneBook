@@ -152,5 +152,8 @@
 .thumbnail:hover{
     border: 2px solid blue;
 }
+.thumbnail{
+    margin-left: 100px;
+}
 
 

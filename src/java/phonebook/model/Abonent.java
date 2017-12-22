@@ -17,22 +17,25 @@ public class Abonent {
     private int id;
     private String firstName;
     private String lastName;
+    private String patronymic;
     private List<PhoneNumber> phonenumber;
-   
+    
     public Abonent() {
     }
 
-    public Abonent(int id, String firstName, String lastName, List<PhoneNumber> phonenumber) {
+    public Abonent(int id, String firstName, String lastName, String patronymic, List<PhoneNumber> phonenumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.patronymic = patronymic;
         this.phonenumber = phonenumber;
     }
 
-    public Abonent(int id, String firstName, String lastName) {
+    public Abonent(int id, String firstName, String lastName, String patronymic) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.patronymic = patronymic;
         phonenumber = new ArrayList<>();
     }
 
@@ -60,6 +63,14 @@ public class Abonent {
         this.lastName = lastName;
     }
 
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
     public List<PhoneNumber> getPhonenumber() {
         return phonenumber;
     }
@@ -70,11 +81,12 @@ public class Abonent {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.firstName);
-        hash = 53 * hash + Objects.hashCode(this.lastName);
-        hash = 53 * hash + Objects.hashCode(this.phonenumber);
+        int hash = 3;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.firstName);
+        hash = 97 * hash + Objects.hashCode(this.lastName);
+        hash = 97 * hash + Objects.hashCode(this.patronymic);
+        hash = 97 * hash + Objects.hashCode(this.phonenumber);
         return hash;
     }
 
@@ -99,6 +111,9 @@ public class Abonent {
         if (!Objects.equals(this.lastName, other.lastName)) {
             return false;
         }
+        if (!Objects.equals(this.patronymic, other.patronymic)) {
+            return false;
+        }
         if (!Objects.equals(this.phonenumber, other.phonenumber)) {
             return false;
         }
@@ -107,9 +122,8 @@ public class Abonent {
 
     @Override
     public String toString() {
-        return "Abonent{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phonenumber=" + phonenumber + '}';
+        return "Abonent{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", patronymic=" + patronymic + ", phonenumber=" + phonenumber + '}';
     }
 
-    
-    
+   
 }

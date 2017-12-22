@@ -3,7 +3,7 @@ class AbonentService
     getAllAbonent()
     {
          var request = new XMLHttpRequest();
-         request.open('GET', '/PhoneBook/GetAllAbonent', false);
+         request.open('GET', '/Phonebook/GetAllAbonent', false);
          request.send();
          if (request.status != 200)  {
               alert( request.status + ': ' + request.statusText ); 
@@ -15,10 +15,10 @@ class AbonentService
          return null;
     }
     
-    getabonentById(id)
+    getAbonentById(id)
     {
          var request = new XMLHttpRequest();
-         request.open('GET', '/PhoneBook/GetAbonentById?id=' + id, false);
+         request.open('GET', '/Phonebook/GetAbonentById?id=' + id, false);
          request.send();
          if (request.status != 200)  {
               alert( request.status + ': ' + request.statusText ); 

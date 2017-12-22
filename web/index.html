@@ -8,18 +8,22 @@
         <link href="lib/css/bootstrap.min.css" rel="stylesheet">
         <link href="lib/css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="lib/css/bootstrap-theme.css" type="text/css"/>
-        <script src="service/AbonentService.js"></script>
-        <script src="service/AdminService.js"></script>
-        <script src="service/PhoneNumberService.js"></script>
         <script src="controllers/AbonentController.js"></script>
         <script src="controllers/AdminController.js"></script>
         <script src="controllers/PhoneNumberController.js"></script>
+        <script src="service/AbonentService.js"></script>
+        <script src="service/AdminService.js"></script>
+        <script src="service/PhoneNumberService.js"></script>
         
          <script>
             function abonentClick(id)
             {
               var phonenumberController =  new PhoneNumberController();
               phonenumberController.getPhoneNumberByAbonentIdView(id);
+            }
+            function phonenumberClick(id)
+            {
+              document.location.href="/Phonebook/view/phonenumbers.html?id=" +id;
             }
         </script>
     </head>
@@ -46,7 +50,11 @@
                 <div class="container">
                     <ul class="nav">
                         <li>
-                            <a href="#">Abonents</a>
+                            <a href="/Phonebook/">Main</a>
+                        </li>
+
+                        <li>
+                            <a href="/Phonebook/view/phonenumbers.html">Abonent</a>
                         </li>
 
                         <li>
@@ -54,11 +62,7 @@
                         </li>
 
                         <li>
-                            <a href="#">Search</a>
-                        </li>
-
-                        <li>
-                            <a href="#">About</a>
+                            <a href="/Phonebook/view/projectInfo.html">About</a>
                         </li>
                     </ul>
                 </div>
@@ -82,11 +86,13 @@
     <script>
          window.onload = function()
          {
+  
               var controller = new AbonentController();
               controller.getAllAbonentView(); 
               var phonenumberController =  new PhoneNumberController();
-              phonenumberController.getPhoneNumberByAbonentId(1);
-         }
+              phonenumberController.getPhoneNumberByAbonentId(4);
+              
+         };
         
     </script>
   </body>

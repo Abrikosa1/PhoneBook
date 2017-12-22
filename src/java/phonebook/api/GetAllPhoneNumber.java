@@ -23,8 +23,8 @@ public class GetAllPhoneNumber extends HttpServlet {
         {
             PhoneNumberController phonenumberController = new PhoneNumberController();
             List<PhoneNumber> list= phonenumberController.getAllPhoneNumber();
-            //String json = JsonPhoneNumberMapper.toJSON(list);
-            out.println(list);
+            String json = JsonPhoneNumberMapper.toJSON(list);
+            out.println(json);
         }
     }
 

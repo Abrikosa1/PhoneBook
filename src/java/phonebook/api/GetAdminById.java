@@ -37,7 +37,7 @@ public class GetAdminById extends HttpServlet {
         try (PrintWriter out = response.getWriter()) 
         {
              AdminController adminController = new AdminController();
-             Admin admin= adminController.getAdminById(5);
+             Admin admin= adminController.getAdminById(1);
              String json=JsonAdminMapper.toJSON(admin);
              out.println(json);
         }
