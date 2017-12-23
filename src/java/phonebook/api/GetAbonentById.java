@@ -34,11 +34,11 @@ public class GetAbonentById extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         try (PrintWriter out = response.getWriter()) 
         {
              AbonentController abonentController = new AbonentController();
-             Abonent abonent= abonentController.getAbonentById(1);
+             Abonent abonent= abonentController.getAbonentById(id);
              String json=JsonAbonentMapper.toJSON(abonent);
              out.println(json);
         }

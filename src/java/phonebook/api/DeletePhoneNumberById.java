@@ -33,11 +33,11 @@ public class DeletePhoneNumberById extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         try (PrintWriter out = response.getWriter()) 
         {
              PhoneNumberController phonenumberController = new PhoneNumberController();
-             PhoneNumber phonenumber= phonenumberController.deletePhoneNumberById(2);
+             PhoneNumber phonenumber= phonenumberController.deletePhoneNumberById(id);
              String json=JsonPhoneNumberMapper.toJSON(phonenumber);
              out.println(json);
         }

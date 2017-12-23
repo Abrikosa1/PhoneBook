@@ -33,11 +33,11 @@ public class DeleteAdminById extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         try (PrintWriter out = response.getWriter()) 
         {
              AdminController adminController = new AdminController();
-             Admin admin= adminController.deleteAdminById(5);
+             Admin admin= adminController.deleteAdminById(id);
              String json=JsonAdminMapper.toJSON(admin);
              out.println(json);
         }

@@ -33,11 +33,11 @@ public class GetPhoneNumberById extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //int id = Integer.parseInt(request.getParameter("3"));
+        int id = Integer.parseInt(request.getParameter("id"));
         try (PrintWriter out = response.getWriter()) 
         {
              PhoneNumberController phonenumberController = new PhoneNumberController();
-             PhoneNumber phonenumber= phonenumberController.getPhoneNumberById(3);
+             PhoneNumber phonenumber= phonenumberController.getPhoneNumberById(id);
              String json=JsonPhoneNumberMapper.toJSON(phonenumber);
              out.println(json);
         }
