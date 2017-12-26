@@ -8,29 +8,34 @@ class PhoneNumberController
     // DATAController
     getPhoneNumberByAbonentId(id)
     {
-        return this.phonenumberService.getPhoneNumberByAbonentId(id)
+        return this.phonenumberService.getPhoneNumberByAbonentId(id)   
     }
     
     //ViewController
     getPhoneNumberByAbonentIdView(id)  {
          var data=this.getPhoneNumberByAbonentId(id)
-        var result="";
+        //var result="";
+        var result="<table class='table'>" +
+                "<thead>" +
+                "<tr>" +
+                "<th>Телефон</th>" +
+                "<th style='width: 36px;'></th>" +
+                "</tr>" +
+                "</thead>";
         for(var i=0; i<data.length;i++)
         {
             var id=data[i].id;
             //var abonentId=data[i].abonentId;
             var phoneNum=data[i].phoneNum;
-             result +=  "<div class='row'>"+
-                        "<div class='col-sm-4 col-md-8'>"+
-                          "<div class='thumbnail' onclick ='phonenumberClick("+id+")'   >"+
-                            "<div class='caption'>"+
-                              "<p>"+phoneNum+"</p>"+
-                            "</div>"+
-                          "</div>"+
-                        "</div>"+
-                      "</div>";
+                result +="<tbody>" +
+                "<tr onclick ='phonenumberClick("+id+")'>" +
+                "<td>"+phoneNum+"</td>"+
+                "<td></td>" +
+                "</tr>" +
+                "</tbody>";
         }
-
+        result+="</table>"+
+                "</div>";
         var element =document.getElementById("phonenumber");
         element.innerHTML = result;
     }
@@ -40,7 +45,7 @@ class PhoneNumberController
     }
     
     //ViewController
-   getPhoneNumberById(id)  {
+   getPhoneNumberByIdView(id)  {
         var data=this.getPhoneNumberById(id);
         var id=data.id;
         var phoneNum=data.phoneNum;
@@ -57,4 +62,36 @@ class PhoneNumberController
         var element =document.getElementById("phonenumber");
         element.innerHTML = result;
     }
+    
+     getAllPhoneNumber()
+    {
+        return this.phonenumberService.getAllPhoneNumber()   
+    }
+    getAllPhoneNumberView()
+    {
+        var data=this.getAllPhoneNumber();
+        var result="<table class='table' style='margin-left:160px;'>" +
+                "<thead>" +
+                "<tr>" +
+                "<th>Телефон</th>" +
+                "<th style='width: 36px;'></th>" +
+                "</tr>" +
+                "</thead>";
+        for(var i=0; i<data.length;i++)
+        {
+            var id=data[i].id;
+            var phoneNum=data[i].phoneNum;
+                result +="<tbody>" +
+                "<tr>" +
+                "<td>"+phoneNum+"</td>"+
+                "<td></td>" +
+                "</tr>" +
+                "</tbody>";
+        }
+        result+="</table>"+
+                "</div>";
+        var element =document.getElementById("phonenumber");
+        element.innerHTML = result;
+    }
+    
 }

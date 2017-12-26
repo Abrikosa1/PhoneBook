@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>PhoneBook</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="lib/css/bootstrap.min.css" rel="stylesheet">
+        <link href="lib/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="lib/css/bootstrap-theme.css" type="text/css"/>
+        <script src="controllers/AbonentController.js"></script>
+        <script src="controllers/AdminController.js"></script>
+        <script src="controllers/PhoneNumberController.js"></script>
+        <script src="service/AbonentService.js"></script>
+        <script src="service/AdminService.js"></script>
+        <script src="service/PhoneNumberService.js"></script>
+
+        <script>
+            function deleteClick(id)
+            {
+                var controller = new AbonentController();
+                 if (confirm("Удалить абонента?")) {
+                    controller.deleteAbonentById(id);
+                  alert("Абонент удален.")
+                 } 
+            }
+            function search()
+            {
+                var abonentService = new AbonentService();
+                var result = "";
+                var array = abonentService.getAllAbonent();
+                var search = document.form1.fullname.value;
+                // var i = array.length;
+                // while (i--) {
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i].lastName + " " + array[i].firstName + " " + array[i].patronymic == search) {
+                        var controller = new AbonentController();
+                        controller.getAbonentByIdView(array[i].id);
+                    }
+                }
+            }
+            function load()
+            {
+                var controller = new AbonentController();
+                controller.getAllAbonentView();
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="head">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="span6">
+                                    <h1 class="muted">PHONEBOOK</h1>
+                                </div>
+
+                                <div class="span4 offset2" style="margin-top:15px;">
+                                    <button class="btn pull-right" type="button">Sign In</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <div class="container">
+                                    <ul class="nav">
+                                        <li>
+                                            <a href="/Phonebook/index_1.html">Главная</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Phonebook/view/projectInfo.html">О Нас</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+
+                <div  class="span2"></div>
+                <form class="form-horizontal" name="form1">
+                    <fieldset style="width: 800px;">
+
+                        <!-- Form Name -->
+                        <legend >Поиск</legend>
+
+                        <!-- Text input-->
+                        <div style="margin-left: 50px;" class="form-group">
+                            <label class="col-md-4 control-label" for="textinput">ФИО</label>  
+                            <div class="col-md-8">
+                                <input id="textinput" name="fullname" type="text" placeholder="Фамилия Имя Отчество" class="form-control input-md"> 
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div style="margin-left: 50px;" class="form-group">
+                            <label class="col-md-4 control-label" for="textinput">Номер телефона</label>  
+                            <div class="col-md-8">
+                                <input id="textinput" name="phone" type="text" placeholder="8-888-888-88-88" class="form-control input-md">  
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div style="margin-left: 50px;" class="form-group">
+                            <label class="col-md-4 control-label" for="singlebutton"></label>
+                            <div class="col-md-4">
+                                <button type="button" onclick="search()" id="singlebutton" name="button" class="btn btn-default">Поиск</button>
+                                <button type="button" onclick="load()" id="singlebutton" name="button" class="btn btn-default">Cбросить</button>
+                            </div>
+                            <div  class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="mur"></div>
+                        </div>
+
+                        <legend>Справочник</legend>
+                        <div id="abonent" style="width: 150%;"></div> 
+                    </fieldset>
+                    <a href="/Phonebook/view/add.html" role="button" id="singlebutton" name="button" class="span4 offset4 btn btn-default" >Добавить</a>
+                </form>
+            </div>
+        </div>
+        
+        <!--  ================================================== -->
+        <script src="lib/js/jquery.min.js"></script>
+        <script src="lib/js/bootstrap.min.js"></script>
+        <script>
+             window.onload = function ()
+             {
+                 var controller = new AbonentController();
+                 controller.getAllAbonentView();
+             }                               
+        </script>
+    </body>
+</html>

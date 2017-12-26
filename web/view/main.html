@@ -1,16 +1,87 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>PhoneBook</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../lib/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../lib/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="../lib/css/bootstrap-theme.css" type="text/css"/>
+        <script src="../controllers/AbonentController.js"></script>
+        <script src="../controllers/AdminController.js"></script>
+        <script src="../controllers/PhoneNumberController.js"></script>
+        <script src="../service/AbonentService.js"></script>
+        <script src="../service/AdminService.js"></script>
+        <script src="../service/PhoneNumberService.js"></script>
+        <script>
+        </script>
     </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+
+  <body>
+    <div class="container">
+  <div class="row">
+    <div class="span12">
+      <div class="head">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="span6">
+                    <h1 class="muted">PHONEBOOK</h1>
+                </div>
+
+                <div class="span4 offset2" style="margin-top:15px;">
+                    <button class="btn pull-right" type="button">Sign In</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                         <li>
+                             <a href="/Phonebook/index_1.html">Главная</a>
+                         </li>
+
+                         <li>
+                             <a href="/Phonebook/view/phonenumbers.html">Номера</a>
+                         </li>
+
+                         <li>
+                             <a href="#">Абоненты</a>
+                         </li>
+
+                         <li>
+                             <a href="/Phonebook/view/projectInfo.html">О Нас</a>
+                         </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="container">
+      <div class="row">
+          <div  class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+          <div id="abonent" class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div> 
+          <div id="phonenumber" class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>  
+          <div  class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+      </div>
+    </div>
+    <!--  ================================================== -->
+    <script src="../lib/js/jquery.min.js"></script>
+    <script src="../lib/js/bootstrap.min.js"></script>
+    <script>
+          window.onload = function()
+         {
+            var url = new URL(document.location.href);
+            var id= url.searchParams.get("id");
+            
+            var phonenumberController =  new PhoneNumberController();
+            phonenumberController.getPhoneNumberByIdView(id);
+         }
+    </script>
+  </body>
 </html>
