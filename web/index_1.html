@@ -26,19 +26,39 @@
             }
             function search()
             {
-                var abonentService = new AbonentService();
-                var result = "";
-                var array = abonentService.getAllAbonent();
                 var search = document.form1.fullname.value;
-                // var i = array.length;
-                // while (i--) {
-                for (var i = 0; i < array.length; i++) {
-                    if (array[i].lastName + " " + array[i].firstName + " " + array[i].patronymic == search) {
-                        var controller = new AbonentController();
-                        controller.getAbonentByIdView(array[i].id);
-                    }
+                var search2 = document.form1.phone.value;
+                var abonentService = new AbonentService();
+                    var array = abonentService.getAllAbonent();
+                    if (search != "") {
+                        var result = "";
+                        // var i = array.length;
+                        // while (i--) {
+                        for (var i = 0; i < array.length; i++) {
+                            if (array[i].lastName + " " + array[i].firstName + " " + array[i].patronymic == search) {
+                                var controller = new AbonentController();
+                                controller.getAbonentByIdView(array[i].id);
+                            }else if((array[i].lastName==search)||(array[i].firstName== search)||(array[i].patronymic == search)){
+                                var controller = new AbonentController();
+                                controller.getAbonentByIdView(array[i].id);
+                            }
+                        }
+                    } else if (search2 != "") {
+
+                        for (var i = 0; i < array.length; i++) {
+                            for (var j = 0; j < array[i].phonenumber.length; j++) {
+                                if (array[i].phonenumber[j].phoneNum == search2) {
+                                    var controller = new AbonentController();
+                                    controller.getAbonentByIdView(array[i].id);
+                                }
+                            }
+                        }
+
+                    } else
+                        alert("Введите ФИО или номер телефона абонента");
+
                 }
-            }
+            
             function load()
             {
                 var controller = new AbonentController();

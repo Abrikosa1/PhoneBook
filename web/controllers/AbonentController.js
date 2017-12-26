@@ -81,8 +81,7 @@ class AbonentController
                 "<td class='text-center'><button type='button' onclick='deleteClick(" + id+ ")'class='btn btn-danger btn-xs' data-toggle='modal'> Del</button></td>" +
                 "</tr>" +
                 "</table>" +
-                "</div>";
-        
+                "</div>";        
         var element =document.getElementById("abonent");
         element.innerHTML = result;
     }
@@ -93,12 +92,9 @@ class AbonentController
     deleteAbonentByIdView(id){
         this.deleteAbonentById(id);
     }
-    insertAbonent()
+
+    insertAbonent(json)
     {
-        return this.abonentService.insertAbonent();
-    }
-    insertAbonentView()
-    {
-        this.abonentService.insertAbonent();
+       return this.abonentService.insertAbonent(json);    
     }
 }

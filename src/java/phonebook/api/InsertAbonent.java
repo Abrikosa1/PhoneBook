@@ -11,10 +11,7 @@ import phonebook.controllers.AbonentController;
 import phonebook.mappers.JsonAbonentMapper;
 import phonebook.model.Abonent;
 
-/**
- *
- * @author Alex
- */
+
 @WebServlet(name = "InsertAbonent", urlPatterns = {"/InsertAbonent"})
 public class InsertAbonent extends HttpServlet {
 

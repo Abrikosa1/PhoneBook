@@ -15,10 +15,22 @@
         <script src="../service/AdminService.js"></script>
         <script src="../service/PhoneNumberService.js"></script>
         <script>
-                function insertAbonent(){
-                    var controller = new AbonentController();
-                    controller.insertAbonent();
-                    }
+         function insertAbonent(){
+                var controller = new AbonentController();
+                var abonent={};
+                var fn = document.form1.firstName.value;
+                var ln = document.form1.lastName.value;
+                var pt = document.form1.patronymic.value;
+                if((fn=="")||(ln=="")||(pt==""))
+                {alert("Введите все данные");}
+                else{
+                abonent.firstName = fn;
+                abonent.lastName = ln;
+                abonent.patronymic = pt;
+                var json = JSON.stringify(abonent);
+                controller.insertAbonent(json);
+                alert("Абонент добавлен");}
+            }
         </script>
     </head>
 
@@ -60,46 +72,46 @@
       <div class="container" style="background-color: white; width:1200px;height: 512px;margin-top: 10px;">
           <div class="row">
               
-              <div  class="span2"></div>
-              <form class="form-horizontal">
+              <div  class="span2" style="padding-bottom: 20px;"></div>
+              <form class="form-horizontal" name="form1">
                   <fieldset style="width: 60%;">
                     
-                    <legend style="padding-top: 20px;">Данные абонента</legend>
-                      <div style="margin-left: 100px;" class="form-group">
+                    <legend style="background-color:#f7f7f7;margin-left: 50px;margin-top: 40px;padding-left: 20px;width: 1140px">Данные абонента</legend>
+                      <div style="margin-left: 200px;margin-right: 400px;" class="form-control-static">
                           <label class="col-md-4 control-label" for="textinput">Фамилия</label>  
                           <div class="col-md-4">
-                              <input id="textinput" name="textinput" placeholder="Иванов" class="form-control input-md" required="" type="text">
+                              <input style="width: 200px;" id="textinput" name="lastName" placeholder="Иванов" class="form-control input-md" required="" type="text">
 
                           </div>
                       </div>
 
                       <!-- Text input-->
-                      <div style="margin-left: 100px;" class="form-group">
+                      <div style="margin-left: -30px;" class="form-control-static">
                           <label class="col-md-4 control-label" for="textinput">Имя</label>  
                           <div class="col-md-4">
-                              <input id="textinput" name="textinput" placeholder="Иван" class="form-control input-md" required="" type="text">
+                              <input style="width: 200px;" id="textinput" name="firstName" placeholder="Иван" class="form-control input-md" required="" type="text">
 
                           </div>
                       </div>
 
                       <!-- Text input-->
-                      <div style="margin-left: 100px;" class="form-group">
+                      <div style="margin-left: 200px;margin-right: 400px;" class="form-control-static"><br>
                           <label class="col-md-4 control-label" for="textinput">Отчество</label>  
                           <div class="col-md-4">
-                              <input id="textinput" name="textinput" placeholder="Иванович" class="form-control input-md" required="" type="text">
+                              <input style="width: 200px;" id="textinput" name="patronymic" placeholder="Иванович" class="form-control input-md" required="" type="text">
 
                           </div>
                       </div>
                        <!-- Text input-->
-                      <div style="margin-left: 100px;" class="form-group">
+                      <div style="margin-left: 10px;" class="form-group">
                           <label class="col-md-4 control-label" for="textinput">Номер телефона</label>  
                           <div class="col-md-4">
-                              <input id="textinput" name="textinput" placeholder="8-888-888-88-88" class="form-control input-md" required="" type="text">
+                              <input style="width: 200px;" id="textinput" name="phoneNum" placeholder="8-888-888-88-88" class="form-control input-md" required="" type="text">
 
                           </div>
                       </div>
                       <!-- Button (Double) -->
-                      <div style="margin-left: 100px;" class="form-group">
+                      <div style="margin-left: 200px;" class="form-group">
                           <label class="col-md-4 control-label" for="save"></label>
                           <div class="col-md-8">
                               <button id="save" onclick="insertAbonent();" name="save" class="btn btn-success">Сохранить</button>

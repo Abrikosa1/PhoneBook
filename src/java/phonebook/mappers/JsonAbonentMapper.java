@@ -48,8 +48,8 @@ public class JsonAbonentMapper {
     public static Abonent fromJSON(String json)  {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Abonent category = mapper.readValue(json, Abonent.class);
-            return category;
+            Abonent abonent = mapper.readValue(json, Abonent.class);
+            return abonent;
         } catch (IOException ex) {
             Logger.getLogger(JsonAbonentMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
