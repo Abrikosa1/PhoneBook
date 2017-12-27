@@ -13,22 +13,15 @@ import java.util.Objects;
  */
 public class PhoneNumber {
     private int id;
+    private int abonentId;
     private String phoneNum;
-    
 
     public PhoneNumber() {
     }
-    public PhoneNumber(int id, String phoneNum) {
-        this.id = id;
-        this.phoneNum = phoneNum;
-        
-    }
 
-    public void setId(int id) {
+    public PhoneNumber(int id, int abonentId, String phoneNum) {
         this.id = id;
-    }
-
-    public void setPhoneNum(String phoneNum) {
+        this.abonentId = abonentId;
         this.phoneNum = phoneNum;
     }
 
@@ -36,15 +29,32 @@ public class PhoneNumber {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getAbonentId() {
+        return abonentId;
+    }
+
+    public void setAbonentId(int abonentId) {
+        this.abonentId = abonentId;
+    }
+
     public String getPhoneNum() {
         return phoneNum;
     }
 
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.phoneNum);
+        int hash = 3;
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + this.abonentId;
+        hash = 37 * hash + Objects.hashCode(this.phoneNum);
         return hash;
     }
 
@@ -63,6 +73,9 @@ public class PhoneNumber {
         if (this.id != other.id) {
             return false;
         }
+        if (this.abonentId != other.abonentId) {
+            return false;
+        }
         if (!Objects.equals(this.phoneNum, other.phoneNum)) {
             return false;
         }
@@ -71,7 +84,9 @@ public class PhoneNumber {
 
     @Override
     public String toString() {
-        return "PhoneNumber{" + "id=" + id + ", phoneNum=" + phoneNum + '}';
+        return "PhoneNumber{" + "id=" + id + ", abonentId=" + abonentId + ", phoneNum=" + phoneNum + '}';
     }
+
     
+
 }

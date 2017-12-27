@@ -41,4 +41,18 @@ class PhoneNumberService
          }
          return null;
     }
+    insertPhoneNumber(json)
+    {
+        var request = new XMLHttpRequest();
+        request.open('GET', '/Phonebook/InsertPhoneNumber?json='+json, false);
+         request.send();
+         if (request.status != 200)  {
+              alert( request.status + ': ' + request.statusText ); 
+         } 
+         else    {
+             json= JSON.parse(request.responseText );
+             return json;
+         }
+         return null;
+    }
 }

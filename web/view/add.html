@@ -17,25 +17,42 @@
         <script>
          function insertAbonent(){
                 var controller = new AbonentController();
+                var controller2 = new PhoneNumberController();
+                var abonentService = new AbonentService();                
                 var abonent={};
+                var phonenumber={};
                 var fn = document.form1.firstName.value;
                 var ln = document.form1.lastName.value;
                 var pt = document.form1.patronymic.value;
-                if((fn=="")||(ln=="")||(pt==""))
-                {alert("Введите все данные");}
-                else{
-                abonent.firstName = fn;
-                abonent.lastName = ln;
-                abonent.patronymic = pt;
-                var json = JSON.stringify(abonent);
-                controller.insertAbonent(json);
-                alert("Абонент добавлен");}
+                var pn = document.form1.phoneNum.value;
+                        if ((fn == "") || (ln == "") || (pt == "") || (pn == ""))
+                        {
+                            alert("Введите все данные");
+                        } else {
+                            abonent.firstName = fn;
+                            abonent.lastName = ln;
+                            abonent.patronymic = pt;
+                            var json = JSON.stringify(abonent);
+                            controller.insertAbonent(json);
+                            var array = abonentService.getAllAbonent();
+                            for (var i = 0; i < array.length; i++) {
+                                if ((array[i].lastName == ln) || (array[i].firstName == fn) || (array[i].patronymic == pt)) {
+                                    phonenumber.abonentId = array[i].id;
+                                } else {
+                                    alert("Абонент не найден. Тел не добавлен");
+                                }
+                            }
+                            phonenumber.phoneNum = pn;
+                            var json2 = JSON.stringify(phonenumber);
+                            controller2.insertPhoneNumber(json2);
+                            alert("Абонент добавлен");
+                        }
             }
         </script>
     </head>
 
-  <body  style="background-image: url(/Phonebook/images/rrr.jpg);">
-      <div class="container">
+    <body  style="background-image: url(/Phonebook/images/rrr.jpg);">
+        <div class="container">
             <div class="row" style="background-color: white; width:1200px">
                 <div class="span12"  style="background-color: white; width: 1150px;">
                     <div class="head">
@@ -69,65 +86,65 @@
                 </div>
             </div>
         </div>
-      <div class="container" style="background-color: white; width:1200px;height: 512px;margin-top: 10px;">
-          <div class="row">
-              
-              <div  class="span2" style="padding-bottom: 20px;"></div>
-              <form class="form-horizontal" name="form1">
-                  <fieldset style="width: 60%;">
-                    
-                    <legend style="background-color:#f7f7f7;margin-left: 50px;margin-top: 40px;padding-left: 20px;width: 1140px">Данные абонента</legend>
-                      <div style="margin-left: 200px;margin-right: 400px;" class="form-control-static">
-                          <label class="col-md-4 control-label" for="textinput">Фамилия</label>  
-                          <div class="col-md-4">
-                              <input style="width: 200px;" id="textinput" name="lastName" placeholder="Иванов" class="form-control input-md" required="" type="text">
+        <div class="container" style="background-color: white; width:1200px;height: 512px;margin-top: 10px;">
+            <div class="row">
 
-                          </div>
-                      </div>
+                <div  class="span2" style="padding-bottom: 20px;"></div>
+                <form class="form-horizontal" name="form1">
+                    <fieldset style="width: 60%;">
 
-                      <!-- Text input-->
-                      <div style="margin-left: -30px;" class="form-control-static">
-                          <label class="col-md-4 control-label" for="textinput">Имя</label>  
-                          <div class="col-md-4">
-                              <input style="width: 200px;" id="textinput" name="firstName" placeholder="Иван" class="form-control input-md" required="" type="text">
+                        <legend style="background-color:#f7f7f7;margin-left: 50px;margin-top: 40px;padding-left: 20px;width: 1140px">Данные абонента</legend>
+                        <div style="margin-left: 200px;margin-right: 400px;" class="form-control-static">
+                            <label class="col-md-4 control-label" for="textinput">Фамилия</label>  
+                            <div class="col-md-4">
+                                <input style="width: 200px;" id="textinput" name="lastName" placeholder="Иванов" class="form-control input-md" required="" type="text">
 
-                          </div>
-                      </div>
+                            </div>
+                        </div>
 
-                      <!-- Text input-->
-                      <div style="margin-left: 200px;margin-right: 400px;" class="form-control-static"><br>
-                          <label class="col-md-4 control-label" for="textinput">Отчество</label>  
-                          <div class="col-md-4">
-                              <input style="width: 200px;" id="textinput" name="patronymic" placeholder="Иванович" class="form-control input-md" required="" type="text">
+                        <!-- Text input-->
+                        <div style="margin-left: -30px;" class="form-control-static">
+                            <label class="col-md-4 control-label" for="textinput">Имя</label>  
+                            <div class="col-md-4">
+                                <input style="width: 200px;" id="textinput" name="firstName" placeholder="Иван" class="form-control input-md" required="" type="text">
 
-                          </div>
-                      </div>
-                       <!-- Text input-->
-                      <div style="margin-left: 10px;" class="form-group">
-                          <label class="col-md-4 control-label" for="textinput">Номер телефона</label>  
-                          <div class="col-md-4">
-                              <input style="width: 200px;" id="textinput" name="phoneNum" placeholder="8-888-888-88-88" class="form-control input-md" required="" type="text">
+                            </div>
+                        </div>
 
-                          </div>
-                      </div>
-                      <!-- Button (Double) -->
-                      <div style="margin-left: 200px;" class="form-group">
-                          <label class="col-md-4 control-label" for="save"></label>
-                          <div class="col-md-8">
-                              <button id="save" onclick="insertAbonent();" name="save" class="btn btn-success">Сохранить</button>
-                              <a href="/Phonebook/index_1.html" role="button" id="cancel" name="cancel" class="btn btn-danger">Отмена</a>
-                          </div>
-                      </div>
+                        <!-- Text input-->
+                        <div style="margin-left: 200px;margin-right: 400px;" class="form-control-static"><br>
+                            <label class="col-md-4 control-label" for="textinput">Отчество</label>  
+                            <div class="col-md-4">
+                                <input style="width: 200px;" id="textinput" name="patronymic" placeholder="Иванович" class="form-control input-md" required="" type="text">
 
-                  </fieldset>
-              </form>
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div style="margin-left: 10px;" class="form-group">
+                            <label class="col-md-4 control-label" for="textinput">Номер телефона</label>  
+                            <div class="col-md-4">
+                                <input style="width: 200px;" id="textinput" name="phoneNum" placeholder="8-888-888-88-88" class="form-control input-md" required="" type="text">
 
-          </div>
-      </div>
-    <!--  ================================================== -->
-    <script src="../lib/js/jquery.min.js"></script>
-    <script src="../lib/js/bootstrap.min.js"></script>
-    <script>
-    </script>
-  </body>
+                            </div>
+                        </div>
+                        <!-- Button (Double) -->
+                        <div style="margin-left: 200px;" class="form-group">
+                            <label class="col-md-4 control-label" for="save"></label>
+                            <div class="col-md-8">
+                                <button id="save" onclick="insertAbonent();" name="save" class="btn btn-success">Сохранить</button>
+                                <a href="/Phonebook/index_1.html" role="button" id="cancel" name="cancel" class="btn btn-danger">Отмена</a>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+
+            </div>
+        </div>
+        <!--  ================================================== -->
+        <script src="../lib/js/jquery.min.js"></script>
+        <script src="../lib/js/bootstrap.min.js"></script>
+        <script>
+        </script>
+    </body>
 </html>

@@ -93,5 +93,8 @@ class PhoneNumberController
         var element =document.getElementById("phonenumber");
         element.innerHTML = result;
     }
-    
+    insertPhoneNumber(json)
+    {
+       return this.phonenumberService.insertPhoneNumber(json);   
+    }
 }

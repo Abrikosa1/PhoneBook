@@ -5,7 +5,8 @@
  
     <resultMap id = "result" type = "phonebook.model.PhoneNumber"> 
        <result property = "id" column = "id"/> 
-       <result property = "phoneNum" column = "phoneNum"/> 
+       <result property = "phoneNum" column = "phoneNum"/>
+       <result property = "abonentId" column = "abonentId"/>
     </resultMap> 
  
     <select id = "selectAll" resultMap = "result"> 
@@ -27,7 +28,7 @@
     </delete> 
 
     <insert id = "insert" parameterType = "phonebook.model.PhoneNumber"> 
-       INSERT INTO PhoneNumber (phoneNum)  
-       VALUES (#{phoneNum});     
+       INSERT INTO PhoneNumber (phoneNum,abonentId)  
+       VALUES (#{phoneNum},#{abonentId});     
     </insert>
 </mapper> 

@@ -22,9 +22,9 @@ public class JsonPhoneNumberMapper {
     public static String toJSON(PhoneNumber phonenumber)
     {
         try{
-    ObjectMapper mapper = new ObjectMapper();
-    String json=mapper.writeValueAsString(phonenumber);
-    return json;
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(phonenumber);
+            return json;
         }
         catch (IOException ex)
         {
@@ -47,8 +47,8 @@ public class JsonPhoneNumberMapper {
     public static PhoneNumber fromJSON(String json)  {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            PhoneNumber category = mapper.readValue(json, PhoneNumber.class);
-            return category;
+            PhoneNumber phonenumber = mapper.readValue(json, PhoneNumber.class);
+            return phonenumber;
         } catch (IOException ex) {
             Logger.getLogger(JsonPhoneNumberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
