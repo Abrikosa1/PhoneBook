@@ -37,21 +37,23 @@
                             var array = abonentService.getAllAbonent();
                             for (var i = 0; i < array.length; i++) {
                                 if ((array[i].lastName == ln) || (array[i].firstName == fn) || (array[i].patronymic == pt)) {
+                                    var check=1;
                                     phonenumber.abonentId = array[i].id;
-                                } else {
-                                    alert("Абонент не найден. Тел не добавлен");
                                 }
-                            }
+                              }
+                              if(check==1){
                             phonenumber.phoneNum = pn;
                             var json2 = JSON.stringify(phonenumber);
                             controller2.insertPhoneNumber(json2);
-                            alert("Абонент добавлен");
-                        }
+                            alert(json2);
+                            alert("Абонент добавлен");}
+                            else alert("Что-то не так");                        
             }
+        }
+        
         </script>
     </head>
-
-    <body  style="background-image: url(/Phonebook/images/rrr.jpg);">
+    <body  style="background-image: url(/Phonebook/images/rrr.jpg);margin-left: -16px">
         <div class="container">
             <div class="row" style="background-color: white; width:1200px">
                 <div class="span12"  style="background-color: white; width: 1150px;">
@@ -89,11 +91,11 @@
         <div class="container" style="background-color: white; width:1200px;height: 512px;margin-top: 10px;">
             <div class="row">
 
-                <div  class="span2" style="padding-bottom: 20px;"></div>
+                <div  class="span2" style="padding-bottom: 30px;"></div>
                 <form class="form-horizontal" name="form1">
                     <fieldset style="width: 60%;">
 
-                        <legend style="background-color:#f7f7f7;margin-left: 50px;margin-top: 40px;padding-left: 20px;width: 1140px">Данные абонента</legend>
+                        <legend style="background-color:#f7f7f7;margin-left: 50px;padding-left: 20px;width: 1140px">Данные абонента</legend>
                         <div style="margin-left: 200px;margin-right: 400px;" class="form-control-static">
                             <label class="col-md-4 control-label" for="textinput">Фамилия</label>  
                             <div class="col-md-4">
@@ -131,7 +133,7 @@
                         <div style="margin-left: 200px;" class="form-group">
                             <label class="col-md-4 control-label" for="save"></label>
                             <div class="col-md-8">
-                                <button id="save" onclick="insertAbonent();" name="save" class="btn btn-success">Сохранить</button>
+                                <button id="save" type="button" onclick="insertAbonent();" name="save" class="btn btn-success">Сохранить</button>
                                 <a href="/Phonebook/index_1.html" role="button" id="cancel" name="cancel" class="btn btn-danger">Отмена</a>
                             </div>
                         </div>

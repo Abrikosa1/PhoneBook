@@ -56,6 +56,7 @@ class AbonentController
     
     //ViewController
    getAbonentByIdView(id)  {
+       
         var data=this.getAbonentById(id);
         var id=data.id;
             var firstName=data.firstName;
@@ -64,13 +65,14 @@ class AbonentController
             var phoneNum="";
             for( var j=0;j<data.phonenumber.length;j++)
                 phoneNum +=  data.phonenumber[j].phoneNum+"</br>";
-        var result="<div style='margin-left:60px; width:1050px' class='row col-md-6 col-md-offset-2 custyle'>"+
-                "<table class='table table-striped custab'>"+
+            document.getElementById("mur").style.visibility = "visible";
+        var result="<div style='margin-left:60px; width:1050px; margin-top:20px;' class='row col-md-6 col-md-offset-2 custyle'>"+
+                "<table class='table table-striped custab' style='margin-top:0px;'>"+
                 "<thead>" +
                 "<tr>" +
                 "<th>#</th>" +
                 "<th>ФИО</th>" +
-                "<th style='width:180px;'>Телефон</th>" +
+                "<th style='width:300px;'>Телефон</th>" +
                 "<th class='text-center' style='width:100px;'></th>" +
                 "</tr>" +
                 "</thead>" +
@@ -82,8 +84,8 @@ class AbonentController
                 "</tr>" +
                 "</table>" +
                 "</div>";        
-        var element =document.getElementById("abonent");
-        element.innerHTML = result;
+        var element =document.getElementById("abonent2");
+        element.innerHTML += result;
     }
     deleteAbonentById(id)
     {

@@ -26,12 +26,14 @@
             }
             function search()
             {
+                 var element2 =document.getElementById("abonent2");
+                 element2.innerHTML = "";
                 var search = document.form1.fullname.value;
                 var search2 = document.form1.phone.value;
                 var abonentService = new AbonentService();
                 var array = abonentService.getAllAbonent();
                 if (search != "") {
-                    var result = "";
+                    var result = "<div>";
                     // var i = array.length;
                     // while (i--) {
                     for (var i = 0; i < array.length; i++) {
@@ -60,7 +62,9 @@
             }
 
             function load()
-            {
+            {   
+                var element2 =document.getElementById("abonent2");
+                element2.innerHTML = "";
                 var controller = new AbonentController();
                 controller.getAllAbonentView();
             }
@@ -101,7 +105,7 @@
                 </div>
             </div>
         </div>
-        <div class="container"  style="background-color: white;width: 1200px;padding-top: 30px;margin-top: 10px;">
+        <div class="container"  style="background-color: white;width: 1200px; padding-top: 30px;margin-top: 10px;">
             <div class="row">
 
                 <div  class="span0"></div>
@@ -129,11 +133,12 @@
                         <div style="margin-left: 50px;" class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton"></label>
                             <div class="col-md-4">
-                                <button type="button" onclick="search()" id="singlebutton" name="button" class="btn btn-default">Поиск</button>
-                                <button type="button" onclick="load()" id="singlebutton" name="button" class="btn btn-default">Cбросить</button>
+                                <button type="button" onclick="search()" id="singlebutton" name="button" class="btn btn-success">Поиск</button>
+                                <button type="button" onclick="load()" id="singlebutton" name="button" class="btn btn-danger">Cбросить</button>
                             </div>
                             <div  class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="mur"></div>
-                        </div>
+                            <div id="abonent2" style="margin-left:-50px;"></div> 
+                        </div>                      
                         <legend style="background-color:#f7f7f7;margin-left: 20px;padding-left: 20px;width: 1140px">Справочник</legend>                        
                         <div id="abonent" style="width: 150%;margin-top: -50px;"></div>                      
                     </fieldset>                    
@@ -145,11 +150,11 @@
         <script src="lib/js/jquery.min.js"></script>
         <script src="lib/js/bootstrap.min.js"></script>
         <script>
-                                    window.onload = function ()
-                                    {
-                                        var controller = new AbonentController();
-                                        controller.getAllAbonentView();
-                                    }
+            window.onload = function ()
+                {
+                var controller = new AbonentController();
+                controller.getAllAbonentView();
+                }
         </script>
     </body>
 </html>
