@@ -97,4 +97,9 @@ class PhoneNumberController
     {
        return this.phonenumberService.insertPhoneNumber(json);   
     }
+    
+    deletePhoneNumberById(id)
+    {
+        return this.phonenumberService.deletePhoneNumberById(id);
+    }
 }

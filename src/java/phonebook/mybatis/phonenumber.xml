@@ -26,6 +26,10 @@
     <delete id = "deleteById" parameterType = "int"> 
        DELETE from phonenumber WHERE id = #{id}; 
     </delete> 
+    
+     <delete id = "deleteByAbonentId" parameterType = "int"> 
+       DELETE from phonenumber WHERE abonentId = #{id}; 
+    </delete> 
 
     <insert id = "insert" parameterType = "phonebook.model.PhoneNumber"> 
        INSERT INTO PhoneNumber (phoneNum,abonentId)  

@@ -19,10 +19,18 @@
             function deleteClick(id)
             {
                 var controller = new AbonentController();
+                var controller2 = new PhoneNumberController();
+                var abonentService = new AbonentService();
+                var array = abonentService.getAllAbonent();
+                //for(var i=0;i<array.length;i++){
+                   // var id2 = array[id].phonenumber[1].id;
+                    //alert(id2);
                 if (confirm("Удалить абонента?")) {
+                    controller2.deletePhoneNumberById(id);
                     controller.deleteAbonentById(id);
                     alert("Абонент удален.")
                 }
+            //}
             }
             function search()
             {
@@ -32,6 +40,7 @@
                 var search2 = document.form1.phone.value;
                 var abonentService = new AbonentService();
                 var array = abonentService.getAllAbonent();
+                var check = 0;
                 if (search != "") {
                     var result = "<div>";
                     // var i = array.length;
@@ -40,11 +49,15 @@
                         if (array[i].lastName + " " + array[i].firstName + " " + array[i].patronymic == search) {
                             var controller = new AbonentController();
                             controller.getAbonentByIdView(array[i].id);
+                            check = 1;
                         } else if ((array[i].lastName == search) || (array[i].firstName == search) || (array[i].patronymic == search)) {
                             var controller = new AbonentController();
                             controller.getAbonentByIdView(array[i].id);
+                            check = 1;
                         }
                     }
+                    if(check==0){
+                    alert("Абонент не найден");}
                 } else if (search2 != "") {
 
                     for (var i = 0; i < array.length; i++) {
@@ -52,9 +65,12 @@
                             if (array[i].phonenumber[j].phoneNum == search2) {
                                 var controller = new AbonentController();
                                 controller.getAbonentByIdView(array[i].id);
+                                check = 1;
                             }
                         }
                     }
+                    if(check==0){
+                    alert("Абонент не найден");}
 
                 } else
                     alert("Введите ФИО или номер телефона абонента");
@@ -62,7 +78,8 @@
             }
 
             function load()
-            {   
+            {   document.form1.fullname.value=""
+                document.form1.phone.value="";
                 var element2 =document.getElementById("abonent2");
                 element2.innerHTML = "";
                 var controller = new AbonentController();
@@ -73,7 +90,7 @@
     <body  style="background-image: url(/Phonebook/images/rrr.jpg);">
         <div class="container">
             <div class="row" style="background-color: white; width:1200px">
-                <div class="span12"  style="background-color: white; width: 1150px;">
+                <div class="span12"  style="background-color: white; width: 1150px">
                     <div class="head">
                         <div class="row-fluid">
                             <div class="span12">

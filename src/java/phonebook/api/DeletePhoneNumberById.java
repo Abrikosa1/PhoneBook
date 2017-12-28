@@ -37,7 +37,7 @@ public class DeletePhoneNumberById extends HttpServlet {
         try (PrintWriter out = response.getWriter()) 
         {
              PhoneNumberController phonenumberController = new PhoneNumberController();
-             PhoneNumber phonenumber= phonenumberController.deletePhoneNumberById(id);
+             PhoneNumber phonenumber= phonenumberController.deletePhoneNumberByAbonentId(id);
              String json=JsonPhoneNumberMapper.toJSON(phonenumber);
              out.println(json);
         }

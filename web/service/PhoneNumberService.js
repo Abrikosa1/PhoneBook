@@ -55,4 +55,18 @@ class PhoneNumberService
          }
          return null;
     }
+      deletePhoneNumberById(id)
+    {
+        var request = new XMLHttpRequest();
+        request.open('GET', '/Phonebook/DeletePhoneNumberById?id=' + id, false);
+         request.send();
+         if (request.status != 200)  {
+              alert( request.status + ': ' + request.statusText ); 
+         } 
+         else    {
+             var phonenumber= JSON.parse(request.responseText );
+             return phonenumber;
+         }
+         return null;
+    }
 }

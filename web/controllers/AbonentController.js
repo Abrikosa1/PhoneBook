@@ -16,7 +16,7 @@ class AbonentController
     {
         var data=this.getAllAbonent();
         var result="<div style='margin-left:60px; width:1050px' class='row col-md-6 col-md-offset-2 custyle'>"+
-                    "<table class='table table-striped custab'>"+
+                    "<table class='table table-striped custab'style='width:100%'>"+
                     "<thead>"+
                     "<tr>"+
                     "<th>#</th>"+
@@ -33,14 +33,13 @@ class AbonentController
             var patronymic=data[i].patronymic;
             var phoneNum="";
             for( var j=0;j<data[i].phonenumber.length;j++)
-                phoneNum +=  data[i].phonenumber[j].phoneNum+"</br>";
-            //result += "<label onclick='abonentClick(" + id+ ")' type='button' class='label'>"+ lastName +" "+firstName +" "+patronymic+ "</label>";
+                phoneNum +=  data[i].phonenumber[j].phoneNum+"</br>";        
            result += 
                     "<tr>" +
                     "<td>" + id + "</td>" +
                     "<td>" + lastName + " " + firstName + " " + patronymic + "</td>" +
                     "<td>" + phoneNum + "</td>" +
-                    "<td class='text-center'><button type='button' onclick='deleteClick(" + id+ ")'class='btn btn-danger btn-xs' data-toggle='modal'> Del</button></td>" +
+                    "<td class='text-center'><button type='button' onclick='deleteClick("+ id +")' class='btn btn-danger btn-xs'> Del</button></td>" +
                     "</tr>";  
         }
         result+="</table>"+
