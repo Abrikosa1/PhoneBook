@@ -33,7 +33,7 @@ class AbonentController
             var patronymic=data[i].patronymic;
             var phoneNum="";
             for( var j=0;j<data[i].phonenumber.length;j++)
-                phoneNum +=  data[i].phonenumber[j].phoneNum+"</br>";        
+                phoneNum +="<div>"+data[i].phonenumber[j].phoneNum+"</div>";        
            result += 
                     "<tr>" +
                     "<td>" + id + "</td>" +

@@ -21,16 +21,11 @@
                 var controller = new AbonentController();
                 var controller2 = new PhoneNumberController();
                 var abonentService = new AbonentService();
-                var array = abonentService.getAllAbonent();
-                //for(var i=0;i<array.length;i++){
-                   // var id2 = array[id].phonenumber[1].id;
-                    //alert(id2);
                 if (confirm("Удалить абонента?")) {
                     controller2.deletePhoneNumberById(id);
                     controller.deleteAbonentById(id);
                     alert("Абонент удален.")
                 }
-            //}
             }
             function search()
             {
@@ -78,12 +73,48 @@
             }
 
             function load()
-            {   document.form1.fullname.value=""
+            {   document.form1.fullname.value="";
                 document.form1.phone.value="";
                 var element2 =document.getElementById("abonent2");
                 element2.innerHTML = "";
                 var controller = new AbonentController();
                 controller.getAllAbonentView();
+            }
+            function loginClick()
+            {   var button = "<button class='btn pull-right' type='button' onclick='logoutClick()'>Logout</button>";
+                var check=0;
+                var adminService = new AdminService(); 
+                var array = adminService.getAllAdmin();
+                var login = document.form2.login.value;
+                var pass = document.form2.pass.value;
+                for (var i = 0; i < array.length; i++) {
+                    if ((array[i].login == login) && (array[i].password == pass)) {
+                       check = 1;
+                    }
+                }
+                if(check==1){
+                    alert("Вход выполнен"); 
+                    document.cookie = "login=" + login;
+                    document.cookie = "password=" + pass;
+                    document.getElementById('inputlogin').style.display = 'none';
+                    document.getElementById('inputpass').style.display = 'none';
+                    var element = document.getElementById("logBut");
+                    element.innerHTML = button;
+                }
+                else if((login=="")||(pass=="")){alert("Введите логин и пароль!");}
+                else{alert("Вход не выполнен. Проверьте введенные данные!");}
+            }
+            function logoutClick()
+            {
+                var cookies = document.cookie.split(";");
+
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i];
+                    var eqPos = cookie.indexOf("=");
+                    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                }
+                location.reload();                
             }
         </script>
     </head>
@@ -97,10 +128,13 @@
                                 <div class="span6">
                                     <h1 class="muted">PHONEBOOK</h1>
                                 </div>
-
-                                <div class="span4 offset2" style="margin-top:15px;">
-                                    <button class="btn pull-right" type="button">Sign In</button>
+                                   <form  name="form2" style="margin-right: -50px;">
+                                <div class="span4 offset2" style="margin-top:15px;" id="logBut">
+                                    <input id="inputlogin" name="login" type="text" placeholder="login" class="input-small" style="width: 140px;height: 29px;">
+                                    <input id="inputpass" name="pass" type="text" placeholder="password" class="input-small" style="width: 140px;height: 29px;">
+                                    <button class="btn pull-right" type="button" onclick="loginClick()">Sign In</button>                                    
                                 </div>
+                                   </form>
                             </div>
                         </div>
 
@@ -143,7 +177,7 @@
                         <div style="margin-left: 50px;" class="form-group">
                             <label class="col-md-4 control-label" for="textinput">Номер телефона</label>  
                             <div class="col-md-8">
-                                <input id="textinput" name="phone" type="text" placeholder="8-888-888-88-88" class="form-control input-md">  
+                                <input id="textinput2" name="phone" type="text" placeholder="8-888-888-88-88" class="form-control input-md">  
                             </div>
                         </div>
                         <!-- Button -->
@@ -151,7 +185,7 @@
                             <label class="col-md-4 control-label" for="singlebutton"></label>
                             <div class="col-md-4">
                                 <button type="button" onclick="search()" id="singlebutton" name="button" class="btn btn-success">Поиск</button>
-                                <button type="button" onclick="load()" id="singlebutton" name="button" class="btn btn-danger">Cбросить</button>
+                                <button type="button" onclick="load()" id="singlebutton2" name="button" class="btn btn-danger">Cбросить</button>
                             </div>
                             <div  class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="mur"></div>
                             <div id="abonent2" style="margin-left:-50px;"></div> 
@@ -171,6 +205,28 @@
                 {
                 var controller = new AbonentController();
                 controller.getAllAbonentView();
+                var login = getCookie("login");
+                var pass = getCookie("password");
+                var button = "<button class='btn pull-right' type='button' onclick='logoutClick()'>Logout</button>";
+                var check=0;
+                var adminService = new AdminService(); 
+                var array = adminService.getAllAdmin();
+                for (var i = 0; i < array.length; i++) {
+                    if ((array[i].login == login) && (array[i].password == pass)) {
+                       check = 1;
+                    }
+                }
+                if(check==1){
+                    document.getElementById('inputlogin').style.display = 'none';
+                    document.getElementById('inputpass').style.display = 'none';
+                    var element = document.getElementById("logBut");
+                    element.innerHTML = button;
+                }
+                }
+                function getCookie(name) {
+                var r = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+                if (r) return r[2];
+                else return "";
                 }
         </script>
     </body>

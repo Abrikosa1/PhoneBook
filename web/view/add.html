@@ -36,7 +36,7 @@
                             controller.insertAbonent(json);
                             var array = abonentService.getAllAbonent();
                             for (var i = 0; i < array.length; i++) {
-                                if ((array[i].lastName == ln) || (array[i].firstName == fn) || (array[i].patronymic == pt)) {
+                                if ((array[i].lastName == ln) && (array[i].firstName == fn) && (array[i].patronymic == pt)) {
                                     var check=1;
                                     phonenumber.abonentId = array[i].id;
                                 }
@@ -45,10 +45,39 @@
                             phonenumber.phoneNum = pn;
                             var json2 = JSON.stringify(phonenumber);
                             controller2.insertPhoneNumber(json2);
-                            alert("Абонент добавлен");}
+                            alert("Абонент добавлен");
+                            document.form1.firstName.value="";
+                            document.form1.lastName.value="";
+                            document.form1.patronymic.value="";
+                            document.form1.phoneNum.value="";
+                            }
                             else alert("Что-то не так");                        
             }
         }
+        function loginClick()
+            {   var button = "<button class='btn pull-right' type='button' onclick='logoutClick()'>Logout</button>";
+                var check=0;
+                var adminService = new AdminService(); 
+                var array = adminService.getAllAdmin();
+                var login = document.form2.login.value;
+                var pass = document.form2.pass.value;
+                for (var i = 0; i < array.length; i++) {
+                    if ((array[i].login == login) && (array[i].password == pass)) {
+                       check = 1;
+                    }
+                }
+                if(check==1){
+                    alert("Вход выполнен"); 
+                    document.cookie = "login=" + login;
+                    document.cookie = "password=" + pass;
+                    document.getElementById('inputlogin').style.display = 'none';
+                    document.getElementById('inputpass').style.display = 'none';
+                    var element = document.getElementById("logBut");
+                    element.innerHTML = button;
+                }
+                else if((login=="")||(pass=="")){alert("Введите логин и пароль!");}
+                else{alert("Вход не выполнен. Проверьте введенные данные!");}
+            }            
         
         </script>
     </head>
@@ -63,9 +92,13 @@
                                     <h1 class="muted">PHONEBOOK</h1>
                                 </div>
 
-                                <div class="span4 offset2" style="margin-top:15px;">
-                                    <button class="btn pull-right" type="button">Sign In</button>
+                                <form  name="form2" style="margin-right: -50px;">
+                                <div class="span4 offset2" style="margin-top:15px;" id="logBut">
+                                    <input id="inputlogin" name="login" type="text" placeholder="login" class="input-small" style="width: 140px;height: 29px;">
+                                    <input id="inputpass" name="pass" type="text" placeholder="password" class="input-small" style="width: 140px;height: 29px;">
+                                    <button class="btn pull-right" type="button" onclick="loginClick()">Sign In</button>                                    
                                 </div>
+                                   </form>
                             </div>
                         </div>
 
@@ -146,6 +179,31 @@
         <script src="../lib/js/jquery.min.js"></script>
         <script src="../lib/js/bootstrap.min.js"></script>
         <script>
+            window.onload = function ()
+                {
+                var login = getCookie("login");
+                var pass = getCookie("password");
+                var button = "<button class='btn pull-right' type='button' onclick='logoutClick()'>Logout</button>";
+                var check=0;
+                var adminService = new AdminService(); 
+                var array = adminService.getAllAdmin();
+                for (var i = 0; i < array.length; i++) {
+                    if ((array[i].login == login) && (array[i].password == pass)) {
+                       check = 1;
+                    }
+                }
+                if(check==1){
+                    document.getElementById('inputlogin').style.display = 'none';
+                    document.getElementById('inputpass').style.display = 'none';
+                    var element = document.getElementById("logBut");
+                    element.innerHTML = button;
+                }
+                }
+                function getCookie(name) {
+                var r = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+                if (r) return r[2];
+                else return "";
+                }
         </script>
     </body>
 </html>
