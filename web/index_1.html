@@ -24,7 +24,8 @@
                 if (confirm("Удалить абонента?")) {
                     controller2.deletePhoneNumberById(id);
                     controller.deleteAbonentById(id);
-                    alert("Абонент удален.")
+                    alert("Абонент удален.");
+                    location.reload();
                 }
             }
             function search()
@@ -94,8 +95,8 @@
                 }
                 if(check==1){
                     alert("Вход выполнен"); 
-                    document.cookie = "login=" + login;
-                    document.cookie = "password=" + pass;
+                    document.cookie = "login=" + login+";path=/";
+                    document.cookie = "password=" + pass+";path=/";
                     document.getElementById('inputlogin').style.display = 'none';
                     document.getElementById('inputpass').style.display = 'none';
                     var element = document.getElementById("logBut");
@@ -106,14 +107,7 @@
             }
             function logoutClick()
             {
-                var cookies = document.cookie.split(";");
-
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = cookies[i];
-                    var eqPos = cookie.indexOf("=");
-                    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                }
+               document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
                 location.reload();                
             }
         </script>
@@ -222,12 +216,13 @@
                     var element = document.getElementById("logBut");
                     element.innerHTML = button;
                 }
-                }
+            }
                 function getCookie(name) {
-                var r = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
-                if (r) return r[2];
-                else return "";
-                }
+                var matches = document.cookie.match(new RegExp(
+                  "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+                ));
+                return matches ? decodeURIComponent(matches[1]) : undefined;
+                 }
         </script>
     </body>
 </html>

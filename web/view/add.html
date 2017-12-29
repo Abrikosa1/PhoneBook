@@ -49,7 +49,7 @@
                             document.form1.firstName.value="";
                             document.form1.lastName.value="";
                             document.form1.patronymic.value="";
-                            document.form1.phoneNum.value="";
+                            document.form1.phoneNum.value="";                           
                             }
                             else alert("Что-то не так");                        
             }
@@ -68,17 +68,21 @@
                 }
                 if(check==1){
                     alert("Вход выполнен"); 
-                    document.cookie = "login=" + login;
-                    document.cookie = "password=" + pass;
-                    document.getElementById('inputlogin').style.display = 'none';
-                    document.getElementById('inputpass').style.display = 'none';
-                    var element = document.getElementById("logBut");
+                    document.cookie = "login=" + login+";path=/";
+                    document.cookie = "password=" + pass+";path=/";
+                    document.getElementById('inputlogin1').style.display = 'none';
+                    document.getElementById('inputpass1').style.display = 'none';
+                    var element = document.getElementById("logBut1");
                     element.innerHTML = button;
                 }
                 else if((login=="")||(pass=="")){alert("Введите логин и пароль!");}
                 else{alert("Вход не выполнен. Проверьте введенные данные!");}
-            }            
-        
+            }
+            function logoutClick()
+            {
+               document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                location.reload();
+            }
         </script>
     </head>
     <body  style="background-image: url(/Phonebook/images/rrr.jpg);margin-left: -16px">
@@ -93,9 +97,9 @@
                                 </div>
 
                                 <form  name="form2" style="margin-right: -50px;">
-                                <div class="span4 offset2" style="margin-top:15px;" id="logBut">
-                                    <input id="inputlogin" name="login" type="text" placeholder="login" class="input-small" style="width: 140px;height: 29px;">
-                                    <input id="inputpass" name="pass" type="text" placeholder="password" class="input-small" style="width: 140px;height: 29px;">
+                                <div class="span4 offset2" style="margin-top:15px;" id="logBut1">
+                                    <input id="inputlogin1" name="login" type="text" placeholder="login" class="input-small" style="width: 140px;height: 29px;">
+                                    <input id="inputpass1" name="pass" type="text" placeholder="password" class="input-small" style="width: 140px;height: 29px;">
                                     <button class="btn pull-right" type="button" onclick="loginClick()">Sign In</button>                                    
                                 </div>
                                    </form>
@@ -193,9 +197,9 @@
                     }
                 }
                 if(check==1){
-                    document.getElementById('inputlogin').style.display = 'none';
-                    document.getElementById('inputpass').style.display = 'none';
-                    var element = document.getElementById("logBut");
+                    document.getElementById('inputlogin1').style.display = 'none';
+                    document.getElementById('inputpass1').style.display = 'none';
+                    var element = document.getElementById("logBut1");
                     element.innerHTML = button;
                 }
                 }
