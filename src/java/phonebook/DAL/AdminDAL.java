@@ -65,6 +65,14 @@ public Admin deleteById(int id)
         session.commit();
         session.close(); 
         return abonent;
-    }    
+    }   
+public Admin selectByLogin(String login)
+{
+        SqlSession session = sqlSessionFactory.openSession(); 
+        Admin admin =  session.selectOne("admin.selectByLogin",login); 
+        session.close(); 
+        return admin;
+}
+
      
 }

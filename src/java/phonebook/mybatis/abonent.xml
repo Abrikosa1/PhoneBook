@@ -27,8 +27,8 @@
        UPDATE abonent SET 
         firstName = #{firstName}, 
         lastName = #{lastName},
-        patronymic = #{patronymic},
-        WHERE id = #{id}; 
+        patronymic = #{patronymic}
+        WHERE ID = #{id}; 
     </update> 
   
     <delete id = "deleteById" parameterType = "int"> 

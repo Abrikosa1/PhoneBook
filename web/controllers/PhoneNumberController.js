@@ -102,4 +102,9 @@ class PhoneNumberController
     {
         return this.phonenumberService.deletePhoneNumberById(id);
     }
+    updatePhoneNumber(json)
+    {
+       return this.phonenumberService.updatePhoneNumber(json);  
+    }
+
 }

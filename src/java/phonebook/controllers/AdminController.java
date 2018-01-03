@@ -45,4 +45,9 @@ public class AdminController
     {
         return adminDal.deleteById(id);
     }
+    public Admin getAdminByLogin(String login)
+    {
+        return adminDal.selectByLogin(login);
+    }
+
 }

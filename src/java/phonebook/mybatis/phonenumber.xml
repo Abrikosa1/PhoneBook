@@ -19,7 +19,7 @@
 
     <update id = "update" parameterType = "phonebook.model.PhoneNumber"> 
        UPDATE phonenumber SET 
-        phoneNum = #{phoneNum}, 
+        phoneNum = #{phoneNum} 
         WHERE id = #{id}; 
     </update> 
   

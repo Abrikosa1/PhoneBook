@@ -15,45 +15,6 @@
         <script src="../service/AdminService.js"></script>
         <script src="../service/PhoneNumberService.js"></script>
         <script>
-         function insertAbonent(){
-                var controller = new AbonentController();
-                var controller2 = new PhoneNumberController();
-                var abonentService = new AbonentService();                
-                var abonent={};
-                var phonenumber={};
-                var fn = document.form1.firstName.value;
-                var ln = document.form1.lastName.value;
-                var pt = document.form1.patronymic.value;
-                var pn = document.form1.phoneNum.value;
-                        if ((fn == "") || (ln == "") || (pt == "") || (pn == ""))
-                        {
-                            alert("Введите все данные");
-                        } else {
-                            abonent.firstName = fn;
-                            abonent.lastName = ln;
-                            abonent.patronymic = pt;
-                            var json = JSON.stringify(abonent);
-                            controller.insertAbonent(json);
-                            var array = abonentService.getAllAbonent();
-                            for (var i = 0; i < array.length; i++) {
-                                if ((array[i].lastName == ln) && (array[i].firstName == fn) && (array[i].patronymic == pt)) {
-                                    var check=1;
-                                    phonenumber.abonentId = array[i].id;
-                                }
-                              }
-                              if(check==1){
-                            phonenumber.phoneNum = pn;
-                            var json2 = JSON.stringify(phonenumber);
-                            controller2.insertPhoneNumber(json2);
-                            alert("Абонент добавлен");
-                            document.form1.firstName.value="";
-                            document.form1.lastName.value="";
-                            document.form1.patronymic.value="";
-                            document.form1.phoneNum.value="";                           
-                            }
-                            else alert("Что-то не так");                        
-            }
-        }
         function loginClick()
             {   var button = "<button class='btn pull-right' type='button' onclick='logoutClick()'>Logout</button>";
                 var check=0;
@@ -85,7 +46,7 @@
             }
         </script>
     </head>
-    <body  style="background-image: url(/Phonebook/images/yy.jpg);margin-left: -16px">
+    <body  style="background-image: url(/Phonebook/images/rrr.jpg);margin-left: -16px">
         <div class="container">
             <div class="row" style="background-color: white; width:1200px">
                 <div class="span12"  style="background-color: white; width: 1150px;">
@@ -158,13 +119,7 @@
                             </div>
                         </div>
                         <!-- Text input-->
-                        <div style="margin-left: 10px;" class="form-group">
-                            <label class="col-md-4 control-label" for="textinput">Номер телефона</label>  
-                            <div class="col-md-4">
-                                <input style="width: 200px;" id="textinput" name="phoneNum" placeholder="8-888-888-88-88" class="form-control input-md" required="" type="text">
-
-                            </div>
-                        </div>
+                        
                         <!-- Button (Double) -->
                         <div style="margin-left: 200px;" class="form-group">
                             <label class="col-md-4 control-label" for="save"></label>

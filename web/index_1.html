@@ -25,8 +25,59 @@
                     controller2.deletePhoneNumberById(id);
                     controller.deleteAbonentById(id);
                     alert("Абонент удален.");
-                    location.reload();
+                    var controller = new AbonentController();
+                    controller.getAllAbonentView();
                 }
+            }
+            function updateClick(id)
+            {
+                var abonentService = new AbonentService();
+                var array = abonentService.getAbonentById(id);
+                var input = 3;
+                var button = "<form name = 'form2' id='form2'><input id='input1' value='"+array.lastName+"' name='ln' type='text' placeholder='Фамилия' class='input-small' style='margin-left:75px;margin-bottom:20px; width:150px;height:30px;'>"+
+                             "<input id='input2' value='"+array.firstName+"' name='fn' type='text' placeholder='Имя' class='input-small' style='margin-left:20px;margin-bottom:20px;width:150px;height:30px;'>"+
+                             "<input id='input3' value='"+array.patronymic+"' name='pt' type='text' placeholder='Отчество' class='input-small'style='margin-left:20px;margin-bottom:20px;width:150px;height:30px;'>";
+                for( var j=0;j<array.phonenumber.length;j++){
+                input +=1;
+                button+="<input id='input"+input+"' name='pt' type='text' placeholder='8-888-888-88-88' value='"+array.phonenumber[j].phoneNum+"' class='input-small'style='margin-left:20px;margin-bottom:20px;width:150px;height:30px;'>";}
+                button+="<button type='button' onclick='editClick("+ id +")' id='editbut' name='editbutton' class='btn btn-success' style='margin-left:20px;height:30px;margin-top:-20px;'>Submit</button>"+
+                        "<button type='button' onclick='closeClick()' id='closebut' name='closebutton' class='btn btn-danger' style='margin-left:20px;height:30px;margin-top:-20px;'>Exit</button></form>";
+                var element = document.getElementById("id2");
+                element.innerHTML = button;
+            }
+            function editClick(id)
+            {   
+                var abonentService = new AbonentService();
+                var input = 3;
+                var array = abonentService.getAbonentById(id);
+                if((document.getElementById('input1').value=="")||(document.getElementById('input2').value=="")||(document.getElementById('input2').value=="")){alert("Введите все данные!");return;}
+                var controller = new AbonentController();
+                var controller2 = new PhoneNumberController();
+                var abonent={};
+                var phonenumber={};
+                abonent.id = id;
+                abonent.lastName =  document.getElementById('input1').value;
+                abonent.firstName = document.getElementById('input2').value;
+                abonent.patronymic =  document.getElementById('input3').value;
+                for( var j=0;j<array.phonenumber.length;j++){
+                    input +=1;
+                    phonenumber.id = array.phonenumber[j].id;
+                    phonenumber.abonentId = id;
+                    phonenumber.phoneNum =  document.getElementById("input"+input+"").value;
+                    if(document.getElementById("input"+input+"").value==""){alert("Введите все данные"); return;}
+                    var json2 = JSON.stringify(phonenumber);
+                    controller2.updatePhoneNumber(json2);
+                }
+                var json = JSON.stringify(abonent);
+                controller.updateAbonent(json);
+                controller.getAllAbonentView();
+                alert("Данные абонента обновлены!");
+            }
+            function closeClick()
+            {
+                var nothing = ""
+                var element = document.getElementById("id2");
+                element.innerHTML = nothing;
             }
             function search()
             {
@@ -112,10 +163,10 @@
             }
         </script>
     </head>
-    <body  style="background-image: url(/Phonebook/images/rrr.jpg);">
+<body  style="background-image: url(/Phonebook/images/yy.jpg);">
         <div class="container">
-            <div class="row" style="background-color: white; width:1200px">
-                <div class="span12"  style="background-color: white; width: 1150px">
+            <div class="row" style="background-color: white; width:1200px;">
+                <div class="span12"  style="background-color: white; width: 1150px;">
                     <div class="head">
                         <div class="row-fluid">
                             <div class="span12">
@@ -156,10 +207,8 @@
                 <div  class="span0"></div>
                 <form class="form-horizontal" name="form1">
                     <fieldset >
-
                         <!-- Form Name -->
                         <legend style="background-color:#f7f7f7;margin-left: 20px;padding-left: 20px;width: 1140px">Поиск</legend>
-
                         <!-- Text input-->
                         <div style="margin-left: 50px;" class="form-group">
                             <label class="col-md-4 control-label" for="textinput">ФИО</label>  
@@ -182,15 +231,17 @@
                                 <button type="button" onclick="load()" id="singlebutton2" name="button" class="btn btn-danger">Cбросить</button>
                             </div>
                             <div  class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="mur"></div>
+                            <div id="id3" style="margin:0px;"></div>
                             <div id="abonent2" style="margin-left:-50px;"></div> 
                         </div>                      
-                        <legend style="background-color:#f7f7f7;margin-left: 20px;padding-left: 20px;width: 1140px">Справочник</legend>                        
-                        <div id="abonent" style="width: 150%;margin-top: -50px;"></div>                      
-                    </fieldset>                    
+                        <legend style="background-color:#f7f7f7;margin-left: 20px;padding-left: 20px;width: 1140px">Справочник</legend>
+                        <div id="id2" style="margin:20px;"></div>
+                        <div id="abonent" style="width: 150%;margin-top: -50px;"></div> 
+                    </fieldset> 
+                    
                 </form>
             </div>
         </div>
-
         <!--  ================================================== -->
         <script src="lib/js/jquery.min.js"></script>
         <script src="lib/js/bootstrap.min.js"></script>

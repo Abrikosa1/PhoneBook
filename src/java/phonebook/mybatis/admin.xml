@@ -16,6 +16,14 @@
     <select id = "selectById" parameterType = "int" resultMap = "result"> 
        SELECT * FROM admin WHERE id = #{id}; 
     </select> 
+    
+     <select id = "selectByLogin" parameterType = "string" resultMap = "result"> 
+       SELECT * FROM admin WHERE login LIKE #{'%login%'}; 
+    </select> 
+    
+    <select id = "selectAllLogin" parameterType = "string" resultMap = "result"> 
+       SELECT * FROM admin WHERE login LIKE #{'%login%'}; 
+    </select> 
 
     <update id = "update" parameterType = "phonebook.model.Admin"> 
        UPDATE admin SET 

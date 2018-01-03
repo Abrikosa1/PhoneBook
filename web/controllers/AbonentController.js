@@ -15,6 +15,7 @@ class AbonentController
     getAllAbonentView()
     {
         var data=this.getAllAbonent();
+        var num = 0;
         var result="<div style='margin-left:60px; width:1050px' class='row col-md-6 col-md-offset-2 custyle'>"+
                     "<table class='table table-striped custab'style='width:100%'>"+
                     "<thead>"+
@@ -22,11 +23,12 @@ class AbonentController
                     "<th>#</th>"+
                     "<th>ФИО</th>" +
                     "<th style='width:300px;'>Телефон</th>" +
-                    "<th class='text-center' style='width:100px;'></th>" +
+                    "<th class='text-center' ></th>" +
                     "</tr>" +
                     "</thead>";
         for(var i=0; i<data.length;i++)
-        {
+        {   
+            num +=1; 
             var id=data[i].id;
             var firstName=data[i].firstName;
             var lastName=data[i].lastName;
@@ -36,10 +38,11 @@ class AbonentController
                 phoneNum +="<div>"+data[i].phonenumber[j].phoneNum+"</div>";        
            result += 
                     "<tr>" +
-                    "<td>" + id + "</td>" +
+                    "<td>" + num + "</td>" +
                     "<td>" + lastName + " " + firstName + " " + patronymic + "</td>" +
                     "<td>" + phoneNum + "</td>" +
-                    "<td class='text-center'><button type='button' onclick='deleteClick("+ id +")' class='btn btn-danger btn-xs'> Del</button></td>" +
+                    //"<td class='text-center'><button type='button' onclick='deleteClick("+ id +")' class='btn btn-danger btn-xs'> Del</button></td>" +
+                    "<td class='text-center'><a class='btn btn-info btn-xs' onclick='updateClick("+ id +")' style='margin-right:10px;'>Edit</a><a onclick='deleteClick("+ id +")' class='btn btn-danger btn-xs'>Del</a></td>"+
                     "</tr>";  
         }
         result+="</table>"+
@@ -56,30 +59,34 @@ class AbonentController
     //ViewController
    getAbonentByIdView(id)  {
        
-        var data=this.getAbonentById(id);
-        var id=data.id;
+            var data=this.getAbonentById(id);
+            var id=data.id;
+            var num = 0;
             var firstName=data.firstName;
             var lastName=data.lastName;
             var patronymic=data.patronymic;
             var phoneNum="";
-            for( var j=0;j<data.phonenumber.length;j++)
+            for( var j=0;j<data.phonenumber.length;j++){
                 phoneNum +=  data.phonenumber[j].phoneNum+"</br>";
+                num +=1;
+                }
             document.getElementById("mur").style.visibility = "visible";
         var result="<div style='margin-left:60px; width:1050px; margin-top:20px;' class='row col-md-6 col-md-offset-2 custyle'>"+
-                "<table class='table table-striped custab' style='margin-top:0px;'>"+
+                "<table class='table table-striped custab' style='margin-top:0px;width:100%'>"+
                 "<thead>" +
                 "<tr>" +
                 "<th>#</th>" +
-                "<th>ФИО</th>" +
+                "<th style='width:450px;'>ФИО</th>" +
                 "<th style='width:300px;'>Телефон</th>" +
-                "<th class='text-center' style='width:100px;'></th>" +
+                "<th class='text-center'></th>" +
                 "</tr>" +
                 "</thead>" +
                 "<tr>" +
-                "<td id='td'>" + id + "</td>" +
+                "<td id='td'>" + num + "</td>" +
                 "<td>" + lastName + " " + firstName + " " + patronymic + "</td>" +
                 "<td>" + phoneNum + "</td>" +
-                "<td class='text-center'><button type='button' onclick='deleteClick(" + id+ ")'class='btn btn-danger btn-xs' data-toggle='modal'> Del</button></td>" +
+                "<td class='text-center'><a class='btn btn-info btn-xs' onclick='updateClick("+ id +")' style='margin-right:10px;'>Edit</a><a onclick='deleteClick("+ id +")' class='btn btn-danger btn-xs'>Del</a></td>"+
+                //<a class='btn btn-info btn-xs' onclick='updateClick("+ id +")'>Edit</a> 
                 "</tr>" +
                 "</table>" +
                 "</div>";        
@@ -97,5 +104,9 @@ class AbonentController
     insertAbonent(json)
     {
        return this.abonentService.insertAbonent(json);    
+    }
+    updateAbonent(json)
+    {
+       return this.abonentService.updateAbonent(json);    
     }
 }
