@@ -69,6 +69,20 @@ class PhoneNumberService
          }
          return null;
     }
+    deletePhoneNumber(id)
+    {
+        var request = new XMLHttpRequest();
+        request.open('GET', '/Phonebook/DeletePhoneNumber?id=' + id, false);
+         request.send();
+         if (request.status != 200)  {
+              alert( request.status + ': ' + request.statusText ); 
+         } 
+         else    {
+             var phonenumber= JSON.parse(request.responseText );
+             return phonenumber;
+         }
+         return null;
+    }
     updatePhoneNumber(json)
     {
         var request = new XMLHttpRequest();

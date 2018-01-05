@@ -25,6 +25,7 @@
                     controller2.deletePhoneNumberById(id);
                     controller.deleteAbonentById(id);
                     alert("Абонент удален.");
+                    updateClick(1);
                     var controller = new AbonentController();
                     controller.getAllAbonentView();
                 }
@@ -34,25 +35,49 @@
                 var abonentService = new AbonentService();
                 var array = abonentService.getAbonentById(id);
                 var input = 3;
-                var button = "<form name = 'form2' id='form2'><input id='input1' value='"+array.lastName+"' name='ln' type='text' placeholder='Фамилия' class='input-small' style='margin-left:75px;margin-bottom:20px; width:150px;height:30px;'>"+
-                             "<input id='input2' value='"+array.firstName+"' name='fn' type='text' placeholder='Имя' class='input-small' style='margin-left:20px;margin-bottom:20px;width:150px;height:30px;'>"+
-                             "<input id='input3' value='"+array.patronymic+"' name='pt' type='text' placeholder='Отчество' class='input-small'style='margin-left:20px;margin-bottom:20px;width:150px;height:30px;'>";
+                var num =0;
+                var button = "<h4 style='margin-left:115px;'>Данные:</h4>"+
+                             "<label class='col-md-4 control-label' for='input1' style='margin-left:125px;width:70px'>Фамилия</label><div class='col-md-1'><input id='input1' value='"+array.lastName+"' name='ln' type='text' placeholder='Фамилия' class='input-small' style='margin-left:35px;width:150px;height:30px;'></div>"+
+                             "<label class='col-md-4 control-label' for='input2' style='margin-left:110px;width:70px'>Имя</label><div class='col-md-1'><input id='input2' value='"+array.firstName+"' name='fn' type='text' placeholder='Имя' class='input-small' style='margin-left:15px;width:150px;height:30px;'></div>"+
+                             "<label class='col-md-4 control-label' for='input3' style='margin-left:100px;width:70px'>Отчество</label><div class='col-md-1'><input id='input3' value='"+array.patronymic+"' name='pt' type='text' placeholder='Отчество' class='input-small'style='margin-left:35px;width:150px;height:30px;'></div><br><br>"+
+                             "<h4 style='margin-left:115px;margin-bottom:-20px'>Номера:</h4><br><br>";
                 for( var j=0;j<array.phonenumber.length;j++){
-                input +=1;
-                button+="<input id='input"+input+"' name='pt' type='text' placeholder='8-888-888-88-88' value='"+array.phonenumber[j].phoneNum+"' class='input-small'style='margin-left:20px;margin-bottom:20px;width:150px;height:30px;'>";}
-                button+="<button type='button' onclick='editClick("+ id +")' id='editbut' name='editbutton' class='btn btn-success' style='margin-left:20px;height:30px;margin-top:-20px;'>Submit</button>"+
-                        "<button type='button' onclick='closeClick()' id='closebut' name='closebutton' class='btn btn-danger' style='margin-left:20px;height:30px;margin-top:-20px;'>Exit</button></form>";
+                input +=1; 
+                num+=1;
+                button+="<label class='col-md-1 control-label' for='input"+input+"' style='margin-left:120px;width:90px' id='label"+num+"'>Номер "+num+"</label><div style='margin-bottom:20px' id='div"+num+"'><input id='input"+input+"' name='pt' type='text' placeholder='8-888-888-88-88' value='"+array.phonenumber[j].phoneNum+"' class='input-small' style='width:150px;height:30px;margin-left:25px'>"+
+                        "<button type='button' onclick='deleteNumClick("+array.phonenumber[j].id+","+id+")' id='delbut' name='delbutton' class='btn btn-danger' style='height:30px;margin-left:10px;'>x</button></div>";}
+                button+="<button type='button' onclick='addClick("+ id +")' id='addbut' name='addbutton' class='btn btn-success' style='margin-left:445px;margin-top:-90px; height:30px;'>+</button>"+
+                        "<div id='id22'></div><button type='button' onclick='editClick("+ id +")' id='editbut' name='editbutton' class='btn btn-success' style='margin-left:235px;height:30px;margin-top:-40px'>Submit</button>"+
+                        "<button type='button' onclick='closeClick()' id='closebut' name='closebutton' class='btn btn-danger' style='margin-left:30px;height:30px;margin-top:-40px'>Exit</button>";
                 var element = document.getElementById("id2");
                 element.innerHTML = button;
+            }
+            function deleteNumClick(id,id2)
+            {
+                 var abonentService = new AbonentService();
+                 var array = abonentService.getAbonentById(id2);
+                 if(array.phonenumber.length<2){alert("Нельзя удалить все номера. Введите номер или удалите абонента!");return;}
+                 if (confirm("Удалить номер?")) {
+                 var controller = new PhoneNumberController();
+                 controller.deletePhoneNumber(id);
+                 alert("Номер удален.");
+                 var controller = new AbonentController();
+                 controller.getAllAbonentView();
+                 updateClick(id2);
+                }
             }
             function editClick(id)
             {   
                 var abonentService = new AbonentService();
                 var input = 3;
                 var array = abonentService.getAbonentById(id);
-                if((document.getElementById('input1').value=="")||(document.getElementById('input2').value=="")||(document.getElementById('input2').value=="")){alert("Введите все данные!");return;}
+                if((document.getElementById('input1').value=="")||(document.getElementById('input2').value=="")||(document.getElementById('input3').value=="")){alert("Введите все данные!");return;}
+                 if(document.getElementById('addinput')){
+                     if(document.getElementById('addinput').value==""){alert("Введите все данные!");return;}
+                 }
                 var controller = new AbonentController();
                 var controller2 = new PhoneNumberController();
+                if (confirm("Обновить данные?")) {
                 var abonent={};
                 var phonenumber={};
                 abonent.id = id;
@@ -64,14 +89,21 @@
                     phonenumber.id = array.phonenumber[j].id;
                     phonenumber.abonentId = id;
                     phonenumber.phoneNum =  document.getElementById("input"+input+"").value;
-                    if(document.getElementById("input"+input+"").value==""){alert("Введите все данные"); return;}
+                    if(document.getElementById("input"+input+"").value==""){alert("Введите все данные!"); return;}
                     var json2 = JSON.stringify(phonenumber);
                     controller2.updatePhoneNumber(json2);
                 }
                 var json = JSON.stringify(abonent);
+                if(document.getElementById('addinput')){
+                     phonenumber.abonentId = id;
+                     phonenumber.phoneNum = document.getElementById('addinput').value;
+                     var json3 = JSON.stringify(phonenumber);
+                     controller2.insertPhoneNumber(json3);
+                 }
                 controller.updateAbonent(json);
                 controller.getAllAbonentView();
                 alert("Данные абонента обновлены!");
+                updateClick(id);}
             }
             function closeClick()
             {
@@ -123,7 +155,20 @@
                     alert("Введите ФИО или номер телефона абонента");
 
             }
-
+            function addClick()
+            {
+                var button = "";
+                button+="<div id='add'><input id='addinput' name='addph' type='text' placeholder='8-888-888-88-88' class='input-small'style='margin-top:-20px;margin-left:235px;width:150px;height:30px;margin-bottom:40px;'>"+
+                        "<button type='button' onclick='exitClick()' id='exitbut' name='exitbutton' class='btn btn-danger' style='margin-left:10px;height:30px;margin-top:-20px;margin-bottom:40px;'>X</button></div>";
+                var element = document.getElementById("id22");
+                element.innerHTML = button;
+            }
+            function exitClick()
+            {
+                var nothing = ""
+                var element = document.getElementById("add");
+                element.innerHTML = nothing;
+            }
             function load()
             {   document.form1.fullname.value="";
                 document.form1.phone.value="";
@@ -235,8 +280,8 @@
                             <div id="abonent2" style="margin-left:-50px;"></div> 
                         </div>                      
                         <legend style="background-color:#f7f7f7;margin-left: 20px;padding-left: 20px;width: 1140px">Справочник</legend>
-                        <div id="id2" style="margin:20px;"></div>
-                        <div id="abonent" style="width: 150%;margin-top: -50px;"></div> 
+                        <div id="id2"></div>
+                        <div id="abonent" style="width: 150%;margin-top: 0px;"></div> 
                     </fieldset> 
                     
                 </form>
