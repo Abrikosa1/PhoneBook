@@ -47,8 +47,8 @@
                 button+="<label class='col-md-1 control-label' for='input"+input+"' style='margin-left:120px;width:90px' id='label"+num+"'>Номер "+num+"</label><div style='margin-bottom:20px' id='div"+num+"'><input id='input"+input+"' name='pt' type='text' placeholder='8-888-888-88-88' value='"+array.phonenumber[j].phoneNum+"' class='input-small' style='width:150px;height:30px;margin-left:25px'>"+
                         "<button type='button' onclick='deleteNumClick("+array.phonenumber[j].id+","+id+")' id='delbut' name='delbutton' class='btn btn-danger' style='height:30px;margin-left:10px;'>x</button></div>";}
                 button+="<button type='button' onclick='addClick("+ id +")' id='addbut' name='addbutton' class='btn btn-success' style='margin-left:445px;margin-top:-90px; height:30px;'>+</button>"+
-                        "<div id='id22'></div><button type='button' onclick='editClick("+ id +")' id='editbut' name='editbutton' class='btn btn-success' style='margin-left:235px;height:30px;margin-top:-40px'>Submit</button>"+
-                        "<button type='button' onclick='closeClick()' id='closebut' name='closebutton' class='btn btn-danger' style='margin-left:30px;height:30px;margin-top:-40px'>Exit</button>";
+                        "<div id='id22'></div><button type='button' onclick='editClick("+ id +")' id='editbut' name='editbutton' class='btn btn-success' style='z-index:1;margin-left:235px;height:30px;margin-top:-40px;position:relative'>Принять</button>"+
+                        "<button type='button' onclick='closeClick()' id='closebut' name='closebutton' class='btn btn-danger' style='margin-left:30px;height:30px;margin-top:-40px;z-index:1;position:relative'>Отмена</button>";
                 var element = document.getElementById("id2");
                 element.innerHTML = button;
             }
@@ -281,7 +281,7 @@
                         </div>                      
                         <legend style="background-color:#f7f7f7;margin-left: 20px;padding-left: 20px;width: 1140px">Справочник</legend>
                         <div id="id2"></div>
-                        <div id="abonent" style="width: 150%;margin-top: 0px;"></div> 
+                        <div id="abonent" style="width: 150%;margin-top: -40px;"></div> 
                     </fieldset> 
                     
                 </form>
