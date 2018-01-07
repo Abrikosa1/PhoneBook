@@ -8,7 +8,7 @@
        <result property = "firstName" column = "firstName"/> 
        <result property = "lastName" column = "lastName"/>
        <result property = "patronymic" column = "patronymic"/>
-       <collection property="phonenumber" javaType="List" ofType="phonebook.model.PhoneNumber" column="id"  select="selectPhoneNumber" />
+       <collection property="phonenumber" javaType="List" ofType="phonebook.model.PhoneNumber" column="id"  select="selectPhoneNumber"/>
     </resultMap> 
  
   <select id="selectPhoneNumber" parameterType="int" resultMap="phonenumber.result">  
@@ -22,7 +22,11 @@
     <select id = "selectById" parameterType = "int" resultMap = "result"> 
        SELECT * FROM abonent WHERE id = #{id}; 
     </select> 
-
+    
+    <select id = "selectByFullname" parameterType = "string" resultMap = "result"> 
+       SELECT * FROM abonent WHERE firstName LIKE #{name} OR lastName LIKE #{name} OR patronymic LIKE #{name};
+    </select> 
+    
     <update id = "update" parameterType = "phonebook.model.Abonent"> 
        UPDATE abonent SET 
         firstName = #{firstName}, 

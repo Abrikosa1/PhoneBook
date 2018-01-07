@@ -74,5 +74,12 @@ public class PhoneNumberDAL extends BaseDAL {
         session.close(); 
         return abonent;
     }
+     public List<PhoneNumber> selectByNumbers(String num)
+    {
+        SqlSession session = sqlSessionFactory.openSession(); 
+        List<PhoneNumber> phonenumber =  session.selectList("phonenumber.selectByNumbers","%"+num+"%"); 
+        session.close(); 
+        return phonenumber;   
+    }
      
 }

@@ -97,4 +97,18 @@ class PhoneNumberService
          }
          return null;
     }
+    getPhoneNumByPhoneNum(num)
+    {
+         var request = new XMLHttpRequest();
+         request.open('GET', '/Phonebook/GetPhoneNumberByPhoneNum?num=' + num, false);
+         request.send();
+         if (request.status != 200)  {
+              alert( request.status + ': ' + request.statusText ); 
+         } 
+         else    {
+             var phonenumberList= JSON.parse(request.responseText );
+             return phonenumberList;
+         }
+         return null;
+    }
 }

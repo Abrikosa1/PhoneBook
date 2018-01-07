@@ -42,4 +42,8 @@ public class AbonentController
     {
         return abonentDal.deleteById(id);
     }
+     public List<Abonent> getAbonentByFullname(String name)
+    {
+        return abonentDal.selectByFullname(name);
+    }
 }

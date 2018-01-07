@@ -13,12 +13,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import phonebook.controllers.AdminController;
-import phonebook.mappers.JsonAdminMapper;
-import phonebook.model.Admin;
+import phonebook.controllers.PhoneNumberController;
+import phonebook.mappers.JsonPhoneNumberMapper;
+import phonebook.model.PhoneNumber;
 
-@WebServlet(name = "GetAdminByLogin", urlPatterns = {"/GetAdminByLogin"})
-public class GetAdminByLogin extends HttpServlet {
+@WebServlet(name = "GetPhoneNumberByPhoneNum", urlPatterns = {"/GetPhoneNumberByPhoneNum"})
+public class GetPhoneNumberByPhoneNum extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,12 +32,12 @@ public class GetAdminByLogin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String login = request.getParameter("login");
+        String num = request.getParameter("num");
         try (PrintWriter out = response.getWriter()) 
         {
-             AdminController adminController = new AdminController();
-             List<Admin> admin= adminController.getAdminByLogin(login);
-             String json=JsonAdminMapper.toJSON(admin);
+             PhoneNumberController phonenumberController = new PhoneNumberController();
+             List<PhoneNumber> phonenumber= phonenumberController.getPhoneNumberByNumbers(num);
+             String json=JsonPhoneNumberMapper.toJSON(phonenumber);
              out.println(json);
         }
     }

@@ -58,5 +58,12 @@ public class AbonentDAL extends BaseDAL {
         session.close(); 
         return abonent;
     }
-     
+     public List<Abonent> selectByFullname(String name)
+    {
+        SqlSession session = sqlSessionFactory.openSession(); 
+        List<Abonent> abonent =  session.selectList("abonent.selectByFullname","%"+name+"%"); 
+        session.close(); 
+        return abonent;
+        
+    }
 }

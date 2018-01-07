@@ -16,6 +16,10 @@
     <select id = "selectById" parameterType = "int" resultMap = "result"> 
        SELECT * FROM phonenumber WHERE id = #{id}; 
     </select> 
+    
+    <select id = "selectByNumbers" parameterType = "string" resultMap = "result"> 
+       SELECT * FROM phonenumber WHERE phoneNum LIKE #{num};
+    </select> 
 
     <update id = "update" parameterType = "phonebook.model.PhoneNumber"> 
        UPDATE phonenumber SET 

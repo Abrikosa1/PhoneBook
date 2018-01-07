@@ -111,6 +111,34 @@
                 var element = document.getElementById("id2");
                 element.innerHTML = nothing;
             }
+            function search2()
+            {
+                 var element2 =document.getElementById("abonent2");
+                 element2.innerHTML = "";
+                 var abonentService = new AbonentService();
+                 var search = document.form1.fullname.value;
+                 var search2 = document.form1.phone.value;
+                 var array = abonentService.getAbonentByFullname(search);
+                 var [a,b,c] = search.split(" ");
+                 var array1 = abonentService.getAbonentByFullname(a);
+                 var array2 = abonentService.getAbonentByFullname(b);
+                 var array3 = abonentService.getAbonentByFullname(c);
+                 if(search !=""){
+                 if(search == ""){alert("Введите ФИО или номер телефона абонента!");return;}
+                 else if(array==0){alert("Абонент не найден!");return;} else {
+                            var controller = new AbonentController();
+                            controller.getAbonentByFullnameView(search);
+                        }
+                    }
+                 else if (search2 != "") 
+                 {
+                     var phonenumberService = new PhoneNumberService();
+                     var data = phonenumberService.getPhoneNumByPhoneNum(search2);
+                     var abonentService = new AbonentService();
+                     var data2 = abonentService.getAllAbonent();
+                    
+                 }
+            }
             function search()
             {
                  var element2 =document.getElementById("abonent2");
@@ -197,6 +225,10 @@
                     document.getElementById('inputpass').style.display = 'none';
                     var element = document.getElementById("logBut");
                     element.innerHTML = button;
+                    var n = document.getElementsByClassName('mur');
+                    for(var i=0;i<n.length;i++){
+                       n[i].disabled = false;
+                    }
                 }
                 else if((login=="")||(pass=="")){alert("Введите логин и пароль!");}
                 else{alert("Вход не выполнен. Проверьте введенные данные!");}
@@ -204,11 +236,12 @@
             function logoutClick()
             {
                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-                location.reload();                
+                location.reload(); 
+                
             }
         </script>
     </head>
-<body  style="background-image: url(/Phonebook/images/yy.jpg);">
+<body  style="background-image: url(/Phonebook/images/subtle.png);">
         <div class="container">
             <div class="row" style="background-color: white; width:1200px;">
                 <div class="span12"  style="background-color: white; width: 1150px;">
@@ -272,7 +305,7 @@
                         <div style="margin-left: 50px;" class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton"></label>
                             <div class="col-md-4">
-                                <button type="button" onclick="search()" id="singlebutton" name="button" class="btn btn-success">Поиск</button>
+                                <button type="button" onclick="search2()" id="singlebutton" name="button" class="btn btn-success">Поиск</button>
                                 <button type="button" onclick="load()" id="singlebutton2" name="button" class="btn btn-danger">Cбросить</button>
                             </div>
                             <div  class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="mur"></div>
@@ -297,7 +330,7 @@
                 controller.getAllAbonentView();
                 var login = getCookie("login");
                 var pass = getCookie("password");
-                var button = "<button class='btn pull-right' type='button' onclick='logoutClick()'>Logout</button>";
+                var button = "<button class='btn pull-right' id='rr' type='button' onclick='logoutClick()'>Logout</button>";
                 var check=0;
                 var adminService = new AdminService(); 
                 var array = adminService.getAllAdmin();
@@ -311,6 +344,10 @@
                     document.getElementById('inputpass').style.display = 'none';
                     var element = document.getElementById("logBut");
                     element.innerHTML = button;
+                    var n = document.getElementsByClassName('mur');
+                    for(var i=0;i<n.length;i++){
+                       n[i].disabled = false;
+                    }
                 }
             }
                 function getCookie(name) {

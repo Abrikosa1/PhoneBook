@@ -49,4 +49,9 @@ public class PhoneNumberController
     {
         return phonenumberDal.deleteByAbonentId(id);
     }
+    
+     public List<PhoneNumber> getPhoneNumberByNumbers(String num)
+    {
+        return phonenumberDal.selectByNumbers(num);
+    }
 }

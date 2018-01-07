@@ -42,7 +42,7 @@ class AbonentController
                     "<td>" + lastName + " " + firstName + " " + patronymic + "</td>" +
                     "<td>" + phoneNum + "</td>" +
                     //"<td class='text-center'><button type='button' onclick='deleteClick("+ id +")' class='btn btn-danger btn-xs'> Del</button></td>" +
-                    "<td class='text-center'><a class='btn btn-info btn-xs' onclick='updateClick("+ id +")' style='margin-right:10px;'>Edit</a><a onclick='deleteClick("+ id +")' class='btn btn-danger btn-xs'>Del</a></td>"+
+                    "<td class='text-center'><button disabled type='button' class='btn btn-info btn-xs mur' onclick='updateClick("+ id +")' style='margin-right:10px;'>Edit</button><button disabled onclick='deleteClick("+ id +")' type='button' class='btn btn-danger btn-xs mur'>Del</button></td>"+
                     "</tr>";  
         }
         result+="</table>"+
@@ -51,14 +51,54 @@ class AbonentController
         var element =document.getElementById("abonent");
         element.innerHTML = result;
     }
+     getAbonentByFullname(name)
+    {
+        return this.abonentService.getAbonentByFullname(name);
+    }
+    //ViewController
+   getAbonentByFullnameView(name)  {
+            var data=this.getAbonentByFullname(name);
+             var num = 0;
+        var result="<div style='margin-left:60px; width:1050px' class='row col-md-6 col-md-offset-2 custyle'>"+
+                    "<table class='table table-striped custab'style='width:100%'>"+
+                    "<thead>"+
+                    "<tr>"+
+                    "<th>#</th>"+
+                    "<th>ФИО</th>" +
+                    "<th style='width:300px;'>Телефон</th>" +
+                    "<th class='text-center' ></th>" +
+                    "</tr>" +
+                    "</thead>";
+        for(var i=0; i<data.length;i++)
+        {   
+            num +=1; 
+            var id=data[i].id;
+            var firstName=data[i].firstName;
+            var lastName=data[i].lastName;
+            var patronymic=data[i].patronymic;
+            var phoneNum="";
+            for( var j=0;j<data[i].phonenumber.length;j++)
+                phoneNum +="<div>"+data[i].phonenumber[j].phoneNum+"</div>";        
+           result += 
+                    "<tr>" +
+                    "<td>" + num + "</td>" +
+                    "<td>" + lastName + " " + firstName + " " + patronymic + "</td>" +
+                    "<td>" + phoneNum + "</td>" +
+                    //"<td class='text-center'><button type='button' onclick='deleteClick("+ id +")' class='btn btn-danger btn-xs'> Del</button></td>" +
+                    "<td class='text-center'><button disabled type='button' class='btn btn-info btn-xs mur' onclick='updateClick("+ id +")' style='margin-right:10px;'>Edit</button><button disabled type='button' onclick='deleteClick("+ id +")' class='btn btn-danger btn-xs mur'>Del</a></td>"+
+                    "</tr>";  
+        }
+        result+="</table>"+
+                "</div>";
+        var element =document.getElementById("abonent2");
+        element.innerHTML = result;
+    }
     getAbonentById(id)
     {
         return this.abonentService.getAbonentById(id);
     }
-    
     //ViewController
    getAbonentByIdView(id)  {
-       
             var data=this.getAbonentById(id);
             var id=data.id;
             var num = 0;
@@ -93,6 +133,7 @@ class AbonentController
         var element =document.getElementById("abonent2");
         element.innerHTML += result;
     }
+    
     deleteAbonentById(id)
     {
         return this.abonentService.deleteAbonentById(id);

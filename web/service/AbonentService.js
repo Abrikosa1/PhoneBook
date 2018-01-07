@@ -72,4 +72,18 @@ class AbonentService
          }
          return null;
     }
+    getAbonentByFullname(name)
+    {
+         var request = new XMLHttpRequest();
+         request.open('GET', '/Phonebook/GetAbonentByFullname?name=' + name, false);
+         request.send();
+         if (request.status != 200)  {
+              alert( request.status + ': ' + request.statusText ); 
+         } 
+         else    {
+             var abonentList= JSON.parse(request.responseText );
+             return abonentList;
+         }
+         return null;
+    }
 }

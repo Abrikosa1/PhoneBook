@@ -9,10 +9,7 @@ import java.util.List;
 import phonebook.model.Admin;
 import org.apache.ibatis.session.SqlSession;
 
-/**
- *
- * @author Alex
- */
+
 public class AdminDAL extends BaseDAL {
 
     public AdminDAL() {
@@ -66,12 +63,13 @@ public Admin deleteById(int id)
         session.close(); 
         return abonent;
     }   
-public Admin selectByLogin(String login)
+public List<Admin> selectByLogin(String login)
 {
         SqlSession session = sqlSessionFactory.openSession(); 
-        Admin admin =  session.selectOne("admin.selectByLogin",login); 
+        List<Admin> admin =  session.selectList("admin.selectByLogin","%"+login+"%"); 
         session.close(); 
         return admin;
+        
 }
 
      
