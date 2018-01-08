@@ -115,29 +115,49 @@
             {
                  var element2 =document.getElementById("abonent2");
                  element2.innerHTML = "";
+                 var controller = new AbonentController();
                  var abonentService = new AbonentService();
                  var search = document.form1.fullname.value;
                  var search2 = document.form1.phone.value;
-                 var array = abonentService.getAbonentByFullname(search);
+                 var array0 = abonentService.getAbonentByFullname(search);
                  var [a,b,c] = search.split(" ");
                  var array1 = abonentService.getAbonentByFullname(a);
                  var array2 = abonentService.getAbonentByFullname(b);
                  var array3 = abonentService.getAbonentByFullname(c);
                  if(search !=""){
-                 if(search == ""){alert("Введите ФИО или номер телефона абонента!");return;}
-                 else if(array==0){alert("Абонент не найден!");return;} else {
+                            var array = abonentService.getAllAbonent();
+                            for (var i = 0; i < array.length; i++) {
+                            if (array[i].lastName + " " + array[i].firstName + " " + array[i].patronymic == search) {
                             var controller = new AbonentController();
+                            controller.getAbonentByIdView(array[i].id);
+                            var check=1;}}
+                            if(check!=1){
                             controller.getAbonentByFullnameView(search);
-                        }
-                    }
-                 else if (search2 != "") 
-                 {
+                                        if (document.getElementById('rr')) {
+                                        var n = document.getElementsByClassName('mur');
+                                        for (var i = 0; i < n.length; i++) {
+                                        n[i].disabled = false;
+                                 }
+                             }
+                         }
+                         } else if (search2 != "")
+                         {
                      var phonenumberService = new PhoneNumberService();
-                     var data = phonenumberService.getPhoneNumByPhoneNum(search2);
-                     var abonentService = new AbonentService();
-                     var data2 = abonentService.getAllAbonent();
-                    
+                     var data = phonenumberService.getPhoneNumByPhoneNum(search2); 
+                     if(data==0){alert("Абонент не найден!");return;} else {
+                     for(var i=0;i<data.length;i++){
+                     controller.abonentByPhoneNumView(data);
+                     }
+                     if(document.getElementById('rr')){
+                            var n = document.getElementsByClassName('mur');
+                            for(var i=0;i<n.length;i++){
+                             n[i].disabled = false;
+                            }}
                  }
+                }
+                else
+                    alert("Введите ФИО или номер телефона абонента!");
+
             }
             function search()
             {
@@ -206,7 +226,7 @@
                 controller.getAllAbonentView();
             }
             function loginClick()
-            {   var button = "<button class='btn pull-right' type='button' onclick='logoutClick()'>Logout</button>";
+            {   var button = "<button class='btn pull-right' id='logoutBut' type='button' onclick='logoutClick()'>Logout</button>";
                 var check=0;
                 var adminService = new AdminService(); 
                 var array = adminService.getAllAdmin();

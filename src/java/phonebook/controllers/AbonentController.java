@@ -46,4 +46,5 @@ public class AbonentController
     {
         return abonentDal.selectByFullname(name);
     }
+
 }

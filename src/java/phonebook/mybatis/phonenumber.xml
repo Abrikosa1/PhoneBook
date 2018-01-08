@@ -18,7 +18,7 @@
     </select> 
     
     <select id = "selectByNumbers" parameterType = "string" resultMap = "result"> 
-       SELECT * FROM phonenumber WHERE phoneNum LIKE #{num};
+       SELECT * FROM phonenumber WHERE phoneNum LIKE #{num} group by abonentId;
     </select> 
 
     <update id = "update" parameterType = "phonebook.model.PhoneNumber"> 
